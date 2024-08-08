@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bn4r3yqvwgie7"]
+
+[ext_resource type="Script" path="res://JsonConfigurator/UI_Components/CompBool.gd" id="1_vnrqo"]
+
+[node name="Bool" type="HBoxContainer"]
+script = ExtResource("1_vnrqo")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NAME: "
+
+[node name="Value" type="CheckBox" parent="."]
+layout_mode = 2

@@ -8,10 +8,13 @@ var _name: Label
 func _ready() -> void:
 	_name = $Label
 
-# NOTE: Override this in all child classes
-func get_value_as_string() -> StringName:
-	return ""
+func base_setup(label: StringName, description: StringName) -> void:
+	_name.text = label
+	_name.tooltip_text = description
+	name = label
 
-# NOTE: Override this in all child classes
-func set_value_as_string(value: StringName):
-	return
+func set_value(value: Variant) -> void:
+	pass
+
+func get_value() -> Variant:
+	return null

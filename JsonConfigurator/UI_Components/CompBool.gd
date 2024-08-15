@@ -8,15 +8,11 @@ func _ready() -> void:
 	super()
 	_bool = $Value
 
-func setup(property_name: StringName, starting_value_str: StringName) -> void:
-	_name.text = property_name
-	set_value_as_string(starting_value_str)
+func setup(property_name: StringName, description: StringName) -> void:
+	base_setup(property_name, description)
 
-func get_value_as_string() -> StringName:
-	if _bool.button_pressed:
-		return "true"
-	else:
-		return "false"
+func set_value(value: Variant) -> void:
+	_bool.button_pressed = value
 
-func set_value_as_string(value: StringName):
-	_bool.button_pressed = value == "true"
+func get_value() -> Variant:
+	return _bool.button_pressed

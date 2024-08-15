@@ -8,14 +8,11 @@ func _ready() -> void:
 	super()
 	_string = $Value
 
-func setup(property_name: StringName, initial_value: StringName, placeholder_text: StringName) -> void:
-	_name.text = property_name
-	_string.text = initial_value
-	_string.placeholder_text = placeholder_text
+func setup(property_name: StringName, description: StringName) -> void:
+	base_setup(property_name, description)
 
-func get_value_as_string() -> StringName:
-	return _string.text
-
-func set_value_as_string(value: StringName):
+func set_value(value: Variant) -> void:
 	_string.text = value
-	return
+
+func get_value() -> Variant:
+	return _string.text

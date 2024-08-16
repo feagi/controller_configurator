@@ -10,7 +10,7 @@ var _header: Label
 
 func _ready() -> void:
 	_box = $DeviceType
-	_header = $DeviceType/Label
+	_header = $DeviceType/HBoxContainer/Label
 
 
 
@@ -24,3 +24,4 @@ func setup(is_input: bool, title: StringName, description: StringName) -> void:
 func spawn_device_default() -> void:
 	var device: Device = DEVICE_PREFAB.instantiate()
 	device.setup(Template.get_parameter_objects_for_device(_is_input, name))
+	_box.add_child(device)

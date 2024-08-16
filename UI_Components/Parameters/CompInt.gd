@@ -1,4 +1,3 @@
-@tool
 extends BaseParameter
 class_name CompInt
 

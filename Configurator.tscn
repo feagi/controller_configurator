@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://d2cq6iyf210ie"]
+[gd_scene load_steps=3 format=3 uid="uid://d2cq6iyf210ie"]
+
+[ext_resource type="PackedScene" uid="uid://cle432y1b702p" path="res://UI_Components/Device/IO/IO.tscn" id="1_a0klu"]
+[ext_resource type="Script" path="res://configurator.gd" id="1_c2atv"]
 
 [node name="Configurator" type="PanelContainer"]
 anchors_preset = 15
@@ -8,6 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_c2atv")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -19,7 +23,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 40
 text = "FEAGI Configurator"
 horizontal_alignment = 1
 
@@ -33,15 +37,16 @@ size_flags_vertical = 3
 
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer/PanelContainer"]
 layout_mode = 2
-current_tab = 0
+current_tab = 1
 
-[node name="Sensory" type="VBoxContainer" parent="VBoxContainer/PanelContainer/TabContainer"]
-layout_mode = 2
-metadata/_tab_index = 0
-
-[node name="Motor" type="VBoxContainer" parent="VBoxContainer/PanelContainer/TabContainer"]
+[node name="Sensory" parent="VBoxContainer/PanelContainer/TabContainer" instance=ExtResource("1_a0klu")]
 visible = false
 layout_mode = 2
+header_text = &"Sensory"
+
+[node name="Motor" parent="VBoxContainer/PanelContainer/TabContainer" instance=ExtResource("1_a0klu")]
+layout_mode = 2
+header_text = &"Motor"
 metadata/_tab_index = 1
 
 [node name="Import and Export" type="VBoxContainer" parent="VBoxContainer/PanelContainer/TabContainer"]

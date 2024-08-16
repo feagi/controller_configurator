@@ -18,7 +18,7 @@ config/features=PackedStringArray("4.3")
 
 [autoload]
 
-FEAGI="*res://addons/FeagiIntegration/Feagi-Interface/FEAGIInterface.gd"
+Template="*res://JSONTemplate.gd"
 
 [debug]
 

@@ -1,16 +1,36 @@
-extends Object
-class_name GlobalJSONEntityFactory
+extends Node
+class_name JSONTemplate
+## Global node
 
 const SUPPORTED_TYPES: Array[StringName] = ["string", "boolean", "integer", "float"] # list, object
 
-const PARAM_BOOL: PackedScene = preload("res://JsonConfigurator/UI_Components/Comp_Bool.tscn")
-const PARAM_STRING: PackedScene = preload("res://JsonConfigurator/UI_Components/Comp_String.tscn")
-const PARAM_INT: PackedScene = preload("res://JsonConfigurator/UI_Components/Comp_Int.tscn")
-const PARAM_FLOAT: PackedScene = preload("res://JsonConfigurator/UI_Components/Comp_Float.tscn")
+const PARAM_BOOL: PackedScene = preload("res://UI_Components/Parameters/Comp_Bool.tscn")
+const PARAM_STRING: PackedScene = preload("res://UI_Components/Parameters/Comp_String.tscn")
+const PARAM_INT: PackedScene = preload("res://UI_Components/Parameters/Comp_Int.tscn")
+const PARAM_FLOAT: PackedScene = preload("res://UI_Components/Parameters/Comp_Float.tscn")
 
+var _template: Dictionary
+
+func _enter_tree() -> void:
+	_template = JSON.parse_string(FileAccess.get_file_as_string("res://template.json"))
+
+## Parses from the global template json the entirety of an IO seciton details
+func get_IO_section(is_input: bool) -> Dictionary:
+	var io: StringName = "output"
+	if is_input:
+		io = "input"
+	return _template[io]
+	
 ## Parses from the global template json, as well as (optionally) the current device dict to get the array of controls making up the device parameters
-static func parse_parameters_for_device(parameters: Array, existing_values_for_device: Dictionary = {}) -> Array[Control]:
+func get_parameter_objects_for_device(is_input: bool, device_type: StringName, existing_values_for_device: Dictionary = {}) -> Array[Control]:
 	var output: Array[Control] = []
+	var io: StringName = "output"
+	if is_input:
+		io = "input"
+	if device_type not in _template[io]:
+		push_error("Unknown device type %s!" % device_type)
+		return []
+	var parameters: Dictionary = _template[io][device_type]
 
 	for parameter: Dictionary in parameters:
 		if "type" not in parameter:

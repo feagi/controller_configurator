@@ -1,4 +1,3 @@
-@tool
 extends HBoxContainer
 class_name BaseParameter
 ## Semi-surperflous base class for setting name / value objects

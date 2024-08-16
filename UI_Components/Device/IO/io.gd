@@ -41,6 +41,7 @@ func _spawn_selected_device_type() -> void:
 	_device_definition_holder.add_child(device_type)
 	var device_type_name: StringName = _device_type_mapping[selected_device_ID]
 	device_type.setup(_is_input, device_type_name, _section_template[device_type_name]["description"])
+	_device_types.selected = -1
 	
 
 func _device_type_removed(device_type_ID: int) -> void:

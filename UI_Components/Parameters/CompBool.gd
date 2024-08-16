@@ -3,11 +3,8 @@ class_name CompBool
 
 var _bool: CheckBox
 
-func _ready() -> void:
-	super()
-	_bool = $Value
-
 func setup(property_name: StringName, description: StringName) -> void:
+	_bool = $Value
 	base_setup(property_name, description)
 
 func set_value(value: Variant) -> void:

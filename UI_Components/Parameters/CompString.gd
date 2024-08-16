@@ -3,11 +3,8 @@ class_name CompString
 
 var _string: LineEdit
 
-func _ready() -> void:
-	super()
-	_string = $Value
-
 func setup(property_name: StringName, description: StringName) -> void:
+	_string = $Value
 	base_setup(property_name, description)
 
 func set_value(value: Variant) -> void:

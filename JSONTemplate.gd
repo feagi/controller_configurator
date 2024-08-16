@@ -30,14 +30,14 @@ func get_parameter_objects_for_device(is_input: bool, device_type: StringName, e
 	if device_type not in _template[io]:
 		push_error("Unknown device type %s!" % device_type)
 		return []
-	var parameters: Dictionary = _template[io][device_type]
+	var parameters: Array = _template[io][device_type]["parameters"]
 
 	for parameter: Dictionary in parameters:
 		if "type" not in parameter:
 			push_error("No parameter type given!")
 			continue
 		if parameter["type"] not in SUPPORTED_TYPES:
-			push_error("Uknown type $s!" % parameter["type"])
+			push_error("Unknown type %s!" % parameter["type"])
 			continue
 		if "label" not in parameter:
 			push_error("No label given for %s parameter!" % parameter["type"])
@@ -64,17 +64,17 @@ func get_parameter_objects_for_device(is_input: bool, device_type: StringName, e
 				if default_value:
 					(appending as CompString).set_value(default_value)
 			"boolean":
-				appending = PARAM_STRING.instantiate()
+				appending = PARAM_BOOL.instantiate()
 				(appending as CompBool).setup(label, description)
 				if default_value:
 					(appending as CompBool).set_value(default_value)
 			"integer":
-				appending = PARAM_STRING.instantiate()
+				appending = PARAM_INT.instantiate()
 				(appending as CompInt).setup(label, description)
 				if default_value:
 					(appending as CompInt).set_value(default_value)
 			"float":
-				appending = PARAM_STRING.instantiate()
+				appending = PARAM_FLOAT.instantiate()
 				(appending as CompFloat).setup(label, description)
 				if default_value:
 					(appending as CompFloat).set_value(default_value)

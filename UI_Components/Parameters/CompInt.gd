@@ -2,12 +2,9 @@ extends BaseParameter
 class_name CompInt
 
 var _int: SpinBox
-
-func _ready() -> void:
-	super()
-	_int = $Value
 	
 func setup(property_name: StringName, description: StringName) -> void:
+	_int = $Value
 	base_setup(property_name, description)
 
 func set_value(value: Variant) -> void:

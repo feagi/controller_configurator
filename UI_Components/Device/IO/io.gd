@@ -1,6 +1,8 @@
 extends VBoxContainer
 class_name IO
 
+const DEVICE_TYPE_PREFAB: PackedScene = preload("res://UI_Components/Device/DeviceType/DeviceType.tscn")
+
 @export var header_text: StringName
 
 var _header: Label
@@ -8,6 +10,7 @@ var _device_types: OptionButton
 var _device_definition_holder: VBoxContainer
 
 var _section_template: Dictionary
+var _is_input: bool
 var _device_type_mapping: Dictionary = {} # mapped by device type ID int to its name string
 
 
@@ -18,6 +21,7 @@ func _ready() -> void:
 	_header.text = header_text
 
 func setup(is_input: bool) -> void:
+	_is_input = is_input
 	var io_section: Dictionary = Template.get_IO_section(is_input)
 	for possible_device_type in io_section:
 		_add_possible_device_type(possible_device_type)
@@ -33,7 +37,11 @@ func _spawn_selected_device_type() -> void:
 	if selected_device_ID == -1:
 		return
 	_device_types.set_item_disabled(selected_device_ID, true)
-	# TODO spawn device category 
+	var device_type: DeviceType = DEVICE_TYPE_PREFAB.instantiate()
+	_device_definition_holder.add_child(device_type)
+	var device_type_name: StringName = _device_type_mapping[selected_device_ID]
+	device_type.setup(_is_input, device_type_name, _section_template[device_type_name]["description"])
+	
 
 func _device_type_removed(device_type_ID: int) -> void:
 	# Device type handles clearing its own nodes

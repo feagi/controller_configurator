@@ -1,5 +1,5 @@
 @tool
-extends BaseUIComponent
+extends BaseParameter
 class_name CompString
 
 var _string: LineEdit

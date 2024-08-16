@@ -1,6 +1,6 @@
 @tool
 extends HBoxContainer
-class_name BaseUIComponent
+class_name BaseParameter
 ## Semi-surperflous base class for setting name / value objects
 
 var _name: Label

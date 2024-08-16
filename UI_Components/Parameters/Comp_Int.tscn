@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dm8uum1gije7f"]
 
-[ext_resource type="Script" path="res://JsonConfigurator/UI_Components/CompInt.gd" id="1_ntqp2"]
+[ext_resource type="Script" path="res://UI_Components/Parameters/CompInt.gd" id="1_ntqp2"]
 
 [node name="Int" type="HBoxContainer"]
 script = ExtResource("1_ntqp2")

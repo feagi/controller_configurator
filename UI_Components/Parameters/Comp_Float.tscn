@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bwrje845fsuf4"]
 
-[ext_resource type="Script" path="res://JsonConfigurator/UI_Components/CompFloat.gd" id="1_2h648"]
+[ext_resource type="Script" path="res://UI_Components/Parameters/CompFloat.gd" id="1_2h648"]
 
 [node name="Float" type="HBoxContainer"]
 script = ExtResource("1_2h648")

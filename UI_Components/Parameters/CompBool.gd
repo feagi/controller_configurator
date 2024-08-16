@@ -1,18 +1,18 @@
 @tool
-extends BaseUIComponent
-class_name CompInt
+extends BaseParameter
+class_name CompBool
 
-var _int: SpinBox
+var _bool: CheckBox
 
 func _ready() -> void:
 	super()
-	_int = $Value
-	
+	_bool = $Value
+
 func setup(property_name: StringName, description: StringName) -> void:
 	base_setup(property_name, description)
 
 func set_value(value: Variant) -> void:
-	_int.value = value
+	_bool.button_pressed = value
 
 func get_value() -> Variant:
-	return _int.value
+	return _bool.button_pressed

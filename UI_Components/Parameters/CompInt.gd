@@ -1,18 +1,18 @@
 @tool
-extends BaseUIComponent
-class_name CompFloat
+extends BaseParameter
+class_name CompInt
 
-var _float: SpinBox
+var _int: SpinBox
 
 func _ready() -> void:
 	super()
-	_float = $Value
-
+	_int = $Value
+	
 func setup(property_name: StringName, description: StringName) -> void:
 	base_setup(property_name, description)
 
 func set_value(value: Variant) -> void:
-	_float.value = value
+	_int.value = value
 
 func get_value() -> Variant:
-	return _float.value
+	return _int.value

@@ -26,7 +26,13 @@ func spawn_device_default() -> void:
 	_box.add_child(device)
 	device.setup(Template.get_parameter_objects_for_device(_is_input, name))
 	device.tree_exited.connect(_on_device_instance_leaving)
-	
+
+func export_as_dict() -> Dictionary:
+	var details: Dictionary = {}
+	for i in range(1, _box.get_child_count()):
+		var device: Device = _box.get_child(i)
+		details.merge(device.get_value_as_dict())
+	return {name : details}
 
 func _on_device_instance_leaving() -> void:
 	# If there are no devices left, delete this item

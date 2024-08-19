@@ -15,3 +15,13 @@ func get_physical_ID() -> int:
 
 func refresh_device_ID_label() -> void:
 	_header.text = "Device " + str(get_physical_ID())
+
+func export_as_dict() -> Dictionary:
+	var holder: VBoxContainer = $MarginContainer/VBoxContainer
+	var details: Dictionary = {}
+	for i in range(1, holder.get_child_count()):
+		var parameter: BaseParameter = holder.get_child(i)
+		details.merge(parameter.get_value_as_dict())
+	return {get_physical_ID() : details}
+		
+		

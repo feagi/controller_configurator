@@ -38,7 +38,7 @@ size_flags_vertical = 3
 
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer/PanelContainer"]
 layout_mode = 2
-current_tab = 1
+current_tab = 2
 
 [node name="Sensory" parent="VBoxContainer/PanelContainer/TabContainer" instance=ExtResource("1_a0klu")]
 visible = false
@@ -46,11 +46,28 @@ layout_mode = 2
 header_text = &"Sensory"
 
 [node name="Motor" parent="VBoxContainer/PanelContainer/TabContainer" instance=ExtResource("1_a0klu")]
+visible = false
 layout_mode = 2
 header_text = &"Motor"
 metadata/_tab_index = 1
 
 [node name="Import and Export" type="VBoxContainer" parent="VBoxContainer/PanelContainer/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer/TabContainer/Import and Export"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/TabContainer/Import and Export/MarginContainer"]
+layout_mode = 2
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer/PanelContainer/TabContainer/Import and Export/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+editable = false
+
+[node name="Button" type="Button" parent="VBoxContainer/PanelContainer/TabContainer/Import and Export/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Generate Configuration Json"
+
+[connection signal="pressed" from="VBoxContainer/PanelContainer/TabContainer/Import and Export/MarginContainer/VBoxContainer/Button" to="." method="_generate_json"]

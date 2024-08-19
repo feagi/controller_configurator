@@ -27,6 +27,15 @@ func setup(is_input: bool) -> void:
 		_add_possible_device_type(possible_device_type)
 	_section_template = io_section
 
+func export_as_dict() -> Dictionary:
+	var details: Dictionary = {}
+	for child in _device_types.get_children():
+		details.merge((child as DeviceType).export_as_dict())
+	var direction: String = "output"
+	if _is_input:
+		direction = "input"
+	return {direction: details}
+
 func _add_possible_device_type(device_type: StringName) -> void:
 	var num_types: int = len(_device_type_mapping)
 	_device_types.add_item(device_type, num_types)

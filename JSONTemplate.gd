@@ -2,7 +2,7 @@ extends Node
 class_name JSONTemplate
 ## Global node
 
-const SUPPORTED_TYPES: Array[StringName] = ["string", "boolean", "integer", "float", "list", "percentage"] # percentage, object
+const SUPPORTED_TYPES: Array[StringName] = ["string", "boolean", "integer", "float", "list", "percentage", "object"]
 
 const PARAM_BOOL: PackedScene = preload("res://UI_Components/Parameters/Comp_Bool.tscn")
 const PARAM_STRING: PackedScene = preload("res://UI_Components/Parameters/Comp_String.tscn")
@@ -10,6 +10,7 @@ const PARAM_INT: PackedScene = preload("res://UI_Components/Parameters/Comp_Int.
 const PARAM_FLOAT: PackedScene = preload("res://UI_Components/Parameters/Comp_Float.tscn")
 const PARAM_PERCENT: PackedScene = preload("res://UI_Components/Parameters/Comp_Percentage.tscn")
 const PARAM_LIST: PackedScene = preload("res://UI_Components/Parameters/Comp_List.tscn")
+const PARAM_OBJECT: PackedScene = preload("res://UI_Components/Parameters/Comp_Object.tscn")
 
 var _template: Dictionary
 
@@ -32,11 +33,10 @@ func get_parameter_objects_for_device(is_input: bool, device_type: StringName, e
 	if device_type not in _template[io]:
 		push_error("Unknown device type %s!" % device_type)
 		return []
-	var parameters: Array = _template[io][device_type]["parameters"]
+	var parameters: Array[Dictionary]
+	parameters.assign(_template[io][device_type]["parameters"])
 
-	for parameter: Dictionary in parameters:
-		output.append(spawn_parameter(parameter, existing_values_for_device))
-	
+	output = _generate_parameter_controls(parameters, existing_values_for_device)
 	return output
 	
 ## Handles spawning logic of single parameters along the JSON. Returns null if something is invalid
@@ -97,20 +97,29 @@ func spawn_parameter(parameter: Dictionary, possible_default_values: Dictionary 
 				default_value = []
 			appending = PARAM_LIST.instantiate()
 			(appending as CompList).setup(label, description)
-			(appending as CompList).setup_internals(_return_parameter_list(parameter["element_type"], parameter["min_length"], default_value))
+			(appending as CompList).setup_internals(_return_parameter_controls_list(parameter["element_type"], parameter["min_length"], default_value))
 		"percentage":
 			appending = PARAM_PERCENT.instantiate()
 			(appending as CompPercentage).setup(label, description)
 			if default_value:
 				(appending as CompPercentage).set_value(default_value)
+		"object":
+			if "parameters" not in parameter:
+				push_error("No parameter defined for object type parameter!")
+				return null
+			appending = PARAM_OBJECT.instantiate()
+			(appending as CompObject).setup(label, description)
+			var subparameters_array: Array[Dictionary]
+			subparameters_array.assign(parameter["parameters"])
+			(appending as CompObject).setup_internals(_generate_parameter_controls(subparameters_array, possible_default_values))
 			
-		
 			
+			
+
 	
 	return appending
-	
 
-func _return_parameter_list(element_type: StringName, count: int, default: Array) -> Array[BaseParameter]:
+func _return_parameter_controls_list(element_type: StringName, count: int, default: Array) -> Array[BaseParameter]:
 	var building_list: Array[BaseParameter] = []
 	var artificial_parameter: Dictionary = {
 		"type" = element_type,
@@ -127,4 +136,13 @@ func _return_parameter_list(element_type: StringName, count: int, default: Array
 		if appending != null:
 			building_list.append(appending)
 	
+	return building_list
+
+func _generate_parameter_controls(object_parameters: Array[Dictionary], existing_values_for_device: Dictionary = {}) -> Array[BaseParameter]:
+	var building_list: Array[BaseParameter] = []
+	# TODO logic for default values? Right now example output shows them as dict, discuss this
+	for parameter: Dictionary in object_parameters:
+		var object: BaseParameter = spawn_parameter(parameter, existing_values_for_device)
+		if object != null:
+			building_list.append(object)
 	return building_list

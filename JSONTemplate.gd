@@ -2,12 +2,13 @@ extends Node
 class_name JSONTemplate
 ## Global node
 
-const SUPPORTED_TYPES: Array[StringName] = ["string", "boolean", "integer", "float", "list"] # list, object
+const SUPPORTED_TYPES: Array[StringName] = ["string", "boolean", "integer", "float", "list", "percentage"] # percentage, object
 
 const PARAM_BOOL: PackedScene = preload("res://UI_Components/Parameters/Comp_Bool.tscn")
 const PARAM_STRING: PackedScene = preload("res://UI_Components/Parameters/Comp_String.tscn")
 const PARAM_INT: PackedScene = preload("res://UI_Components/Parameters/Comp_Int.tscn")
 const PARAM_FLOAT: PackedScene = preload("res://UI_Components/Parameters/Comp_Float.tscn")
+const PARAM_PERCENT: PackedScene = preload("res://UI_Components/Parameters/Comp_Percentage.tscn")
 const PARAM_LIST: PackedScene = preload("res://UI_Components/Parameters/Comp_List.tscn")
 
 var _template: Dictionary
@@ -34,12 +35,12 @@ func get_parameter_objects_for_device(is_input: bool, device_type: StringName, e
 	var parameters: Array = _template[io][device_type]["parameters"]
 
 	for parameter: Dictionary in parameters:
-		output.append(_spawn_parameter(parameter))
+		output.append(spawn_parameter(parameter, existing_values_for_device))
 	
 	return output
 	
-
-func _spawn_parameter(parameter: Dictionary, default_value: Variant = null) -> BaseParameter:
+## Handles spawning logic of single parameters along the JSON. Returns null if something is invalid
+func spawn_parameter(parameter: Dictionary, possible_default_values: Dictionary = {}) -> BaseParameter:
 	if "type" not in parameter:
 		push_error("No parameter type given!")
 		return null
@@ -57,7 +58,10 @@ func _spawn_parameter(parameter: Dictionary, default_value: Variant = null) -> B
 	var description: StringName = parameter["description"]
 	var appending: BaseParameter = null
 
-	if default_value == null and "default" in parameter:
+	var default_value: Variant = null
+	if label in possible_default_values:
+		default_value = possible_default_values[label]
+	elif default_value == null and "default" in parameter:
 		default_value = parameter["default"]
 	
 	match(parameter["type"]):
@@ -94,6 +98,13 @@ func _spawn_parameter(parameter: Dictionary, default_value: Variant = null) -> B
 			appending = PARAM_LIST.instantiate()
 			(appending as CompList).setup(label, description)
 			(appending as CompList).setup_internals(_return_parameter_list(parameter["element_type"], parameter["min_length"], default_value))
+		"percentage":
+			appending = PARAM_PERCENT.instantiate()
+			(appending as CompPercentage).setup(label, description)
+			if default_value:
+				(appending as CompPercentage).set_value(default_value)
+			
+		
 			
 	
 	return appending
@@ -109,12 +120,11 @@ func _return_parameter_list(element_type: StringName, count: int, default: Array
 	var appending: BaseParameter
 	for i in range(count):
 		if i < len(default):
-			appending = _spawn_parameter(artificial_parameter, default[i])
+			appending = spawn_parameter(artificial_parameter, default[i])
 		else:
-			appending = _spawn_parameter(artificial_parameter)
+			appending = spawn_parameter(artificial_parameter)
 	
 		if appending != null:
 			building_list.append(appending)
 	
 	return building_list
-	

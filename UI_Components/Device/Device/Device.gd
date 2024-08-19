@@ -1,8 +1,8 @@
 extends PanelContainer
 class_name Device
 
-func setup(parameters: Array[Control]) -> void:
-	var holder: VBoxContainer = $VBoxContainer
+func setup(parameters: Array[BaseParameter]) -> void:
+	var holder: VBoxContainer = $MarginContainer/VBoxContainer
 	for parameter in parameters:
 		holder.add_child(parameter)
 

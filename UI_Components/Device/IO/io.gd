@@ -17,7 +17,7 @@ var _device_type_mapping: Dictionary = {} # mapped by device type ID int to its 
 func _ready() -> void:
 	_header = $Label
 	_device_types = $HBoxContainer/OptionButton
-	_device_definition_holder = $PanelContainer/ScrollContainer/VBoxContainer
+	_device_definition_holder = $PanelContainer/MarginContainer/ScrollContainer/VBoxContainer
 	_header.text = header_text
 
 func setup(is_input: bool) -> void:

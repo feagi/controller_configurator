@@ -23,5 +23,12 @@ func setup(is_input: bool, title: StringName, description: StringName) -> void:
 
 func spawn_device_default() -> void:
 	var device: Device = DEVICE_PREFAB.instantiate()
-	device.setup(Template.get_parameter_objects_for_device(_is_input, name))
 	_box.add_child(device)
+	device.setup(Template.get_parameter_objects_for_device(_is_input, name))
+	device.tree_exited.connect(_on_device_instance_leaving)
+	
+
+func _on_device_instance_leaving() -> void:
+	# If there are no devices left, delete this item
+	if _box.get_child_count() == 1: # one will exist due to the header
+		queue_free()

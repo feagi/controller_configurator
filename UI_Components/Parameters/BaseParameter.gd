@@ -14,3 +14,6 @@ func set_value(_value: Variant) -> void:
 
 func get_value() -> Variant:
 	return null
+
+func get_value_as_dict() -> Dictionary:
+	return {name: get_value()}

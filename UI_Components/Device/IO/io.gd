@@ -42,6 +42,7 @@ func _spawn_selected_device_type() -> void:
 	var device_type_name: StringName = _device_type_mapping[selected_device_ID]
 	device_type.setup(_is_input, device_type_name, _section_template[device_type_name]["description"])
 	_device_types.selected = -1
+	device_type.tree_exited.connect(_device_type_removed.bind(selected_device_ID))
 	
 
 func _device_type_removed(device_type_ID: int) -> void:

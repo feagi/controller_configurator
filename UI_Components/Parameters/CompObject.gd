@@ -23,3 +23,10 @@ func get_value() -> Variant:
 	for internal in _internals:
 		output.append(internal.get_value())
 	return output
+
+## OVERRIDDEN
+func get_value_as_dict() -> Dictionary:
+	var output: Dictionary = {}
+	for internal in _internals:
+		output.merge(internal.get_value_as_dict())
+	return output

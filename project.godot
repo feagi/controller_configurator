@@ -35,6 +35,10 @@ window/size/window_height_override=720
 
 enabled=PackedStringArray()
 
+[gui]
+
+theme/custom="res://UI_Components/Theme.tres"
+
 [input]
 
 move_left={

@@ -31,10 +31,13 @@ func export_as_dict() -> Dictionary:
 	var details: Dictionary = {}
 	for i in range(1, _box.get_child_count()):
 		var device: Device = _box.get_child(i)
-		details.merge(device.get_value_as_dict())
+		details.merge(device.export_as_dict())
 	return {name : details}
 
 func _on_device_instance_leaving() -> void:
 	# If there are no devices left, delete this item
 	if _box.get_child_count() == 1: # one will exist due to the header
 		queue_free()
+		return
+	for i in range(1, _box.get_child_count()):
+		(_box.get_child(i) as Device).refresh_device_ID_label()

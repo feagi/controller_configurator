@@ -65,6 +65,8 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 editable = false
+wrap_mode = 1
+autowrap_mode = 2
 
 [node name="Button" type="Button" parent="VBoxContainer/PanelContainer/TabContainer/Import and Export/MarginContainer/VBoxContainer"]
 layout_mode = 2

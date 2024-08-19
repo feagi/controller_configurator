@@ -29,7 +29,7 @@ func setup(is_input: bool) -> void:
 
 func export_as_dict() -> Dictionary:
 	var details: Dictionary = {}
-	for child in _device_types.get_children():
+	for child in _device_definition_holder.get_children():
 		details.merge((child as DeviceType).export_as_dict())
 	var direction: String = "output"
 	if _is_input:

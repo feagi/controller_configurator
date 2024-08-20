@@ -470,6 +470,7 @@
 					"parameters": [
 						{
 							"label": "X offset percentage",
+							"description": "X offset percentage",
 							"type": "percentage",
 							"default": 1,
 							"min": 1,
@@ -477,6 +478,7 @@
 						},
 						{
 							"label": "Y offset percentage",
+							"description": "Y offset percentage",
 							"type": "percentage",
 							"default": 1,
 							"min": 1,

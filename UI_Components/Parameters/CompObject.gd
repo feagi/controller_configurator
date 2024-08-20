@@ -29,4 +29,4 @@ func get_value_as_dict() -> Dictionary:
 	var output: Dictionary = {}
 	for internal in _internals:
 		output.merge(internal.get_value_as_dict())
-	return output
+	return {name: output}

@@ -64,6 +64,18 @@ func spawn_parameter(parameter: Dictionary, possible_default_values: Dictionary 
 	elif default_value == null and "default" in parameter:
 		default_value = parameter["default"]
 	
+	var toggle_parameter_name: StringName = ""
+	var toggle_invert: bool = false
+	
+	if "depends_on" in parameter:
+		if str(parameter["depends_on"]).begins_with("!"):
+			toggle_parameter_name = str(parameter["depends_on"]).lstrip("!")
+			toggle_invert = true
+		else:
+			toggle_parameter_name = str(parameter["depends_on"])
+		
+			
+	
 	match(parameter["type"]):
 		"string":
 			appending = PARAM_STRING.instantiate()
@@ -112,11 +124,11 @@ func spawn_parameter(parameter: Dictionary, possible_default_values: Dictionary 
 			var subparameters_array: Array[Dictionary]
 			subparameters_array.assign(parameter["parameters"])
 			(appending as CompObject).setup_internals(_generate_parameter_controls(subparameters_array, possible_default_values))
-			
-			
-			
 
-	
+	if toggle_invert:
+		appending.flag_for_inverse_toggle_by_parameter_of_name = toggle_parameter_name
+	else:
+		appending.flag_for_toggle_by_parameter_of_name = toggle_parameter_name
 	return appending
 
 func _return_parameter_controls_list(element_type: StringName, count: int, default: Array) -> Array[BaseParameter]:
@@ -144,5 +156,35 @@ func _generate_parameter_controls(object_parameters: Array[Dictionary], existing
 	for parameter: Dictionary in object_parameters:
 		var object: BaseParameter = spawn_parameter(parameter, existing_values_for_device)
 		if object != null:
-			building_list.append(object)
+			_attempt_connect_visibity_toggle(object, building_list)
+			building_list.append(object) 
 	return building_list
+
+func _attempt_connect_visibity_toggle(toggling_object: BaseParameter, existing_objects: Array[BaseParameter]) -> void:
+	if !toggling_object.flag_for_toggle_by_parameter_of_name.is_empty():
+		for object in existing_objects:
+			if object.name != toggling_object.flag_for_toggle_by_parameter_of_name:
+				continue
+			if object is CompBool:
+				(object as CompBool).bool_changed.connect(toggling_object.set_visible)
+				toggling_object.visible = (object as CompBool).get_value()
+				return
+			push_error("Attempt to make visibility of %s depend on %s, but %s is not a boolean parameter!" % [toggling_object.name, object.name, object.name])
+			return
+		push_error("Attempt to make visibility of %s depend on unknown object %s! was it initialized prior?" % [toggling_object.name, toggling_object.flag_for_toggle_by_parameter_of_name])
+		return
+	if !toggling_object.flag_for_inverse_toggle_by_parameter_of_name.is_empty():
+		for object in existing_objects:
+			if object.name != toggling_object.flag_for_inverse_toggle_by_parameter_of_name:
+				continue
+			if object is CompBool:
+				(object as CompBool).bool_changed_inversed.connect(toggling_object.set_visible)
+				toggling_object.visible = !(object as CompBool).get_value()
+				return
+			push_error("Attempt to make visibility of %s inversely depend on %s, but %s is not a boolean parameter!" % [toggling_object.name, object.name, object.name])
+			return
+		push_error("Attempt to make visibility of %s inversely depend on unknown object %s! was it initialized prior?" % [toggling_object.name, toggling_object.flag_for_toggle_by_parameter_of_name])
+		return
+	return
+					
+		

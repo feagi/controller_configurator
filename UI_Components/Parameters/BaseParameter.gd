@@ -3,6 +3,9 @@ class_name BaseParameter
 ## Semi-surperflous base class for setting name / value objects
 
 
+var flag_for_toggle_by_parameter_of_name: StringName = ""
+var flag_for_inverse_toggle_by_parameter_of_name: StringName = ""
+
 func base_setup(label: StringName, description: StringName) -> void:
 	var label_text: Label = $Label
 	label_text.text = label

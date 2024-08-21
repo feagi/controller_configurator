@@ -41,6 +41,7 @@ func get_parameter_objects_for_device(is_input: bool, device_type: StringName, e
 	
 ## Handles spawning logic of single parameters along the JSON. Returns null if something is invalid
 func spawn_parameter(parameter: Dictionary, possible_default_values: Dictionary = {}) -> BaseParameter:
+	# Validation
 	if "type" not in parameter:
 		push_error("No parameter type given!")
 		return null
@@ -73,9 +74,8 @@ func spawn_parameter(parameter: Dictionary, possible_default_values: Dictionary 
 			toggle_invert = true
 		else:
 			toggle_parameter_name = str(parameter["depends_on"])
-		
-			
-	
+
+	# Spawning
 	match(parameter["type"]):
 		"string":
 			appending = PARAM_STRING.instantiate()

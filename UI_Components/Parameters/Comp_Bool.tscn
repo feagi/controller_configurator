@@ -9,6 +9,12 @@ script = ExtResource("1_vnrqo")
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Why are you locked in the bathroom?
+You talking to me?
+Maybe you should try getting a job?
+Okay, where?
+Majestic 12"
+mouse_filter = 1
 text = "NAME: "
 
 [node name="Value" type="CheckBox" parent="."]

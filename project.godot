@@ -12,7 +12,6 @@ config_version=5
 
 config/name="FEAGI Configurator"
 config/description="Generates configuration files for use with FEAGI connectors"
-config/tags=PackedStringArray("2d", "demo", "official")
 run/main_scene="res://Configurator.tscn"
 config/features=PackedStringArray("4.3")
 
@@ -22,6 +21,8 @@ Template="*res://JSONTemplate.gd"
 
 [debug]
 
+settings/crash_handler/message="Please Submit an issue to FEAGI/Contoller_Configurator"
+settings/crash_handler/message.editor="Please Submit an issue to FEAGI/Contoller_Configurator"
 gdscript/warnings/redundant_await=false
 
 [display]

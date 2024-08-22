@@ -2,7 +2,7 @@ extends Node
 class_name JSONTemplate
 ## Global node
 
-const SUPPORTED_TYPES: Array[StringName] = ["string", "boolean", "integer", "float", "list", "percentage", "object"]
+const SUPPORTED_TYPES: Array[StringName] = ["string", "boolean", "integer", "float", "list", "percentage", "object", "vector3"]
 
 const PARAM_BOOL: PackedScene = preload("res://UI_Components/Parameters/Comp_Bool.tscn")
 const PARAM_STRING: PackedScene = preload("res://UI_Components/Parameters/Comp_String.tscn")
@@ -11,6 +11,7 @@ const PARAM_FLOAT: PackedScene = preload("res://UI_Components/Parameters/Comp_Fl
 const PARAM_PERCENT: PackedScene = preload("res://UI_Components/Parameters/Comp_Percentage.tscn")
 const PARAM_LIST: PackedScene = preload("res://UI_Components/Parameters/Comp_List.tscn")
 const PARAM_OBJECT: PackedScene = preload("res://UI_Components/Parameters/Comp_Object.tscn")
+const PARAM_VECTOR3: PackedScene = preload("res://UI_Components/Parameters/Comp_Vector3.tscn")
 
 var _template: Dictionary
 
@@ -124,6 +125,11 @@ func spawn_parameter(parameter: Dictionary, possible_default_values: Dictionary 
 			var subparameters_array: Array[Dictionary]
 			subparameters_array.assign(parameter["parameters"])
 			(appending as CompObject).setup_internals(_generate_parameter_controls(subparameters_array, possible_default_values))
+		"vector3":
+			appending = PARAM_VECTOR3.instantiate()
+			(appending as CompVector3).setup(label, description)
+			if default_value:
+				(appending as CompVector3).set_value(default_value)
 
 	if toggle_invert:
 		appending.flag_for_inverse_toggle_by_parameter_of_name = toggle_parameter_name

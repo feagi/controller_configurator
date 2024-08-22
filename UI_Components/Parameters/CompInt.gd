@@ -12,3 +12,9 @@ func set_value(value: Variant) -> void:
 
 func get_value() -> Variant:
 	return _int.value
+
+func set_max(max_value: int) -> void:
+	_int.max_value = max_value
+
+func set_min(min_value: int) -> void:
+	_int.min_value = min_value

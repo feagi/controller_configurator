@@ -93,11 +93,19 @@ func spawn_parameter(parameter: Dictionary, possible_default_values: Dictionary 
 			(appending as CompInt).setup(label, description)
 			if default_value:
 				(appending as CompInt).set_value(default_value)
+			if "min" in parameter:
+				(appending as CompInt).set_min(parameter["min"])
+			if "max" in parameter:
+				(appending as CompInt).set_max(parameter["max"])
 		"float":
 			appending = PARAM_FLOAT.instantiate()
 			(appending as CompFloat).setup(label, description)
 			if default_value:
 				(appending as CompFloat).set_value(default_value)
+			if "min" in parameter:
+				(appending as CompFloat).set_min(parameter["min"])
+			if "max" in parameter:
+				(appending as CompFloat).set_max(parameter["max"])
 		"list":
 			if "element_type" not in parameter:
 				push_error("No element type defined for list parameter!")
@@ -116,6 +124,10 @@ func spawn_parameter(parameter: Dictionary, possible_default_values: Dictionary 
 			(appending as CompPercentage).setup(label, description)
 			if default_value:
 				(appending as CompPercentage).set_value(default_value)
+			if "min" in parameter:
+				(appending as CompPercentage).set_min(parameter["min"])
+			if "max" in parameter:
+				(appending as CompPercentage).set_max(parameter["max"])
 		"object":
 			if "parameters" not in parameter:
 				push_error("No parameter defined for object type parameter!")

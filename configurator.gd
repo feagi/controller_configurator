@@ -19,6 +19,6 @@ func export_capabilities() -> Dictionary:
 
 func _generate_json() -> void:
 	var capabilities: Dictionary = export_capabilities()
-	var json: StringName = JSON.stringify(capabilities)
+	var json: StringName = JSON.stringify(capabilities, "\t")
 	var textbox: TextEdit = $"VBoxContainer/PanelContainer/TabContainer/Import and Export/MarginContainer/VBoxContainer/TextEdit"
 	textbox.text = json

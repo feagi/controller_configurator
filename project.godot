@@ -10,24 +10,19 @@ config_version=5
 
 [application]
 
-config/name="Dodge the Creeps"
-config/description="This is a simple game where your character must move
-and avoid the enemies for as long as possible.
-
-This is a finished version of the game featured in the 'Your first 2D game'
-tutorial in the documentation. For more details, consider
-following the tutorial in the documentation."
-config/tags=PackedStringArray("2d", "demo", "official")
-run/main_scene="res://Main.tscn"
+config/name="FEAGI Configurator"
+config/description="Generates configuration files for use with FEAGI connectors"
+run/main_scene="res://Configurator.tscn"
 config/features=PackedStringArray("4.3")
-config/icon="res://icon.webp"
 
 [autoload]
 
-FEAGI="*res://addons/FeagiIntegration/Feagi-Interface/FEAGIInterface.gd"
+Template="*res://JSONTemplate.gd"
 
 [debug]
 
+settings/crash_handler/message="Please Submit an issue to FEAGI/Contoller_Configurator"
+settings/crash_handler/message.editor="Please Submit an issue to FEAGI/Contoller_Configurator"
 gdscript/warnings/redundant_await=false
 
 [display]
@@ -36,11 +31,14 @@ window/size/viewport_width=480
 window/size/viewport_height=720
 window/size/window_width_override=480
 window/size/window_height_override=720
-window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/FeagiIntegration/plugin.cfg")
+enabled=PackedStringArray()
+
+[gui]
+
+theme/custom="res://UI_Components/Theme.tres"
 
 [input]
 

@@ -37,16 +37,24 @@ func _import_json() -> void:
 		push_error("JSON expected to be a dictionary!")
 		return
 	if "capabilities" not in (raw_import as Dictionary):
-		print("'Capabilities' Key Expected!")
+		push_error("'Capabilities' Key Expected!")
 		return
 	var capabilities: Dictionary = (raw_import as Dictionary)["capabilities"]
 	if "input" not in capabilities:
-		print("'input' Key Expected!")
+		push_error("'input' Key Expected!")
 		return
 	if "output" not in capabilities:
-		print("'output' Key Expected!")
+		push_error("'output' Key Expected!")
+		return
+	if capabilities["input"] is not Dictionary:
+		push_error("inputs missing dictionary!")
+		return
+	if capabilities["output"] is not Dictionary:
+		push_error("Output missing dictionary!")
 		return
 	 # at this point, we likely have something valid. clear the current stuff and prepare to import new
 	clear_UI()
+	_sensory.import_from_dicts(capabilities["input"])
+	_motor.import_from_dicts(capabilities["output"])
 	
 	

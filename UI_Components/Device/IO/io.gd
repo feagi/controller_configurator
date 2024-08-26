@@ -43,7 +43,7 @@ func import_from_dicts(elements: Dictionary) -> void:
 			continue
 		var device_type_holder: DeviceType = _spawn_device_type(device_type_name)
 		var device_definitions: Dictionary = elements[device_type_name]
-		for raw_single_device_definition in device_definitions.values:
+		for raw_single_device_definition in device_definitions.values():
 			if raw_single_device_definition is not Dictionary:
 				push_error("Device definition for device of type %s appears malformed!" % device_type_name)
 				device_type_holder.queue_free()

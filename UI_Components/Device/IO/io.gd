@@ -54,8 +54,7 @@ func import_from_dicts(elements: Dictionary) -> void:
 
 func clear_UI() -> void:
 	for child in _device_definition_holder.get_children():
-		#_device_type_removed((child as DeviceType).device_ID)
-		child.queue_free()
+		child.free() # SCARY
 
 func _add_device_button_pressed() -> void:
 	var selected_device_type: StringName = _device_types.get_selected_text()

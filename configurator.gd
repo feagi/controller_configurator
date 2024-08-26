@@ -4,8 +4,10 @@ class_name Configurator
 var _sensory: IO
 var _motor: IO
 var _textbox: TextEdit
+var _tab_container: TabContainer
 
 func _ready() -> void:
+	_tab_container = $VBoxContainer/PanelContainer/TabContainer
 	_sensory = $VBoxContainer/PanelContainer/TabContainer/Sensory
 	_motor = $VBoxContainer/PanelContainer/TabContainer/Motor
 	_textbox = $"VBoxContainer/PanelContainer/TabContainer/Import and Export/MarginContainer/VBoxContainer/TextEdit"
@@ -56,5 +58,6 @@ func _import_json() -> void:
 	clear_UI()
 	_sensory.import_from_dicts(capabilities["input"])
 	_motor.import_from_dicts(capabilities["output"])
+	_tab_container.current_tab = 0
 	
 	

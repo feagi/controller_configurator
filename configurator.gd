@@ -31,13 +31,22 @@ func _generate_json() -> void:
 func _import_json() -> void:
 	var raw_import: Variant = JSON.parse_string(_textbox.text)
 	if !raw_import:
+		push_error("Inputted string does not seem to be a valid JSON object!")
 		return
 	if raw_import is Array:
+		push_error("JSON expected to be a dictionary!")
 		return
 	if "capabilities" not in (raw_import as Dictionary):
+		print("'Capabilities' Key Expected!")
 		return
 	var capabilities: Dictionary = (raw_import as Dictionary)["capabilities"]
-	
+	if "input" not in capabilities:
+		print("'input' Key Expected!")
+		return
+	if "output" not in capabilities:
+		print("'output' Key Expected!")
+		return
 	 # at this point, we likely have something valid. clear the current stuff and prepare to import new
 	clear_UI()
+	
 	

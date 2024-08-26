@@ -3,8 +3,6 @@ class_name DeviceType
 
 const DEVICE_PREFAB: PackedScene = preload("res://UI_Components/Device/Device/Device.tscn")
 
-var device_ID: int
-
 var _is_input: bool
 
 var _box: VBoxContainer
@@ -15,20 +13,18 @@ func _ready() -> void:
 	_header = $DeviceType/HBoxContainer/Label
 
 
-
-func setup(is_input: bool, title: StringName, description: StringName, ID_of_device: int) -> void:
-	device_ID = ID_of_device
+func setup(is_input: bool, title: StringName, description: StringName) -> void:
 	_is_input = is_input
 	name = title
 	_header.text = title
 	_header.tooltip_text = description
-	spawn_device_default()
 
-func spawn_device_default() -> void:
+func spawn_device(properties: Dictionary = {}) -> void:
 	var device: Device = DEVICE_PREFAB.instantiate()
 	_box.add_child(device)
-	device.setup(Template.get_parameter_objects_for_device(_is_input, name))
+	device.setup(Template.get_parameter_objects_for_device(_is_input, name, properties))
 	device.tree_exited.connect(_on_device_instance_leaving)
+	
 
 func export_as_dict() -> Dictionary:
 	var details: Dictionary = {}

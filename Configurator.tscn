@@ -38,7 +38,7 @@ size_flags_vertical = 3
 
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer/PanelContainer"]
 layout_mode = 2
-current_tab = 2
+current_tab = 1
 
 [node name="Sensory" parent="VBoxContainer/PanelContainer/TabContainer" instance=ExtResource("1_a0klu")]
 visible = false
@@ -46,12 +46,12 @@ layout_mode = 2
 header_text = &"Sensory"
 
 [node name="Motor" parent="VBoxContainer/PanelContainer/TabContainer" instance=ExtResource("1_a0klu")]
-visible = false
 layout_mode = 2
 header_text = &"Motor"
 metadata/_tab_index = 1
 
 [node name="Import and Export" type="VBoxContainer" parent="VBoxContainer/PanelContainer/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 

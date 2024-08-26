@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cle432y1b702p"]
+[gd_scene load_steps=3 format=3 uid="uid://cle432y1b702p"]
 
 [ext_resource type="Script" path="res://UI_Components/Device/IO/io.gd" id="1_gvbxx"]
+[ext_resource type="Script" path="res://UI_Components/Device/IO/IODropDown.gd" id="2_gq4li"]
 
 [node name="IO" type="VBoxContainer"]
 offset_right = 480.0
@@ -26,6 +27,7 @@ text = "Add Device Type: "
 layout_mode = 2
 size_flags_horizontal = 3
 fit_to_longest_item = false
+script = ExtResource("2_gq4li")
 
 [node name="Button" type="Button" parent="HBoxContainer"]
 layout_mode = 2
@@ -47,4 +49,4 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 32
 
-[connection signal="pressed" from="HBoxContainer/Button" to="." method="_spawn_selected_device_type"]
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_add_device_button_pressed"]

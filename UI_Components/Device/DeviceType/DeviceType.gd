@@ -3,6 +3,8 @@ class_name DeviceType
 
 const DEVICE_PREFAB: PackedScene = preload("res://UI_Components/Device/Device/Device.tscn")
 
+var device_ID: int
+
 var _is_input: bool
 
 var _box: VBoxContainer
@@ -14,7 +16,8 @@ func _ready() -> void:
 
 
 
-func setup(is_input: bool, title: StringName, description: StringName) -> void:
+func setup(is_input: bool, title: StringName, description: StringName, ID_of_device: int) -> void:
+	device_ID = ID_of_device
 	_is_input = is_input
 	name = title
 	_header.text = title

@@ -36,6 +36,12 @@ func export_as_dict() -> Dictionary:
 		direction = "input"
 	return {direction: details}
 
+func clear_UI() -> void:
+	for child in _device_definition_holder.get_children():
+		_device_type_removed((child as DeviceType).device_ID)
+		child.queue_free()
+		
+
 func _add_possible_device_type(device_type: StringName) -> void:
 	var num_types: int = len(_device_type_mapping)
 	_device_types.add_item(device_type, num_types)
@@ -49,7 +55,7 @@ func _spawn_selected_device_type() -> void:
 	var device_type: DeviceType = DEVICE_TYPE_PREFAB.instantiate()
 	_device_definition_holder.add_child(device_type)
 	var device_type_name: StringName = _device_type_mapping[selected_device_ID]
-	device_type.setup(_is_input, device_type_name, _section_template[device_type_name]["description"])
+	device_type.setup(_is_input, device_type_name, _section_template[device_type_name]["description"], selected_device_ID)
 	_device_types.selected = -1
 	device_type.tree_exited.connect(_device_type_removed.bind(selected_device_ID))
 	

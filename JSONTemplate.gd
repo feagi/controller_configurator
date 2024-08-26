@@ -2,7 +2,7 @@ extends Node
 class_name JSONTemplate
 ## Global node
 
-const SUPPORTED_TYPES: Array[StringName] = ["string", "boolean", "integer", "float", "list", "percentage", "object", "vector3"]
+const SUPPORTED_TYPES: Array[StringName] = ["string", "boolean", "integer", "float", "percentage", "object", "vector3"] # remove "list" support since it is redudant in all our current uses. use vector3 instead
 
 const PARAM_BOOL: PackedScene = preload("res://UI_Components/Parameters/Comp_Bool.tscn")
 const PARAM_STRING: PackedScene = preload("res://UI_Components/Parameters/Comp_String.tscn")

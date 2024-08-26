@@ -123,10 +123,10 @@
 					"default": false
 				},
 				{
-					"label": "disabled",
-					"description": "Disables the device when true.",
-					"type": "boolean",
-					"default": false
+					"label": "feagi_index",
+					"description": "An index to place",
+					"type": "integer",
+					"default": 0
 				}
 			]
 		}

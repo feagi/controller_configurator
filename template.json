@@ -178,7 +178,7 @@
 				}
 			]
 		},
-		"gyroscope": {
+		"gyro": {
 			"label": "Gyroscope Sensor",
 			"description": "",
 			"parameters": [
@@ -360,13 +360,13 @@
 					"label": "max_distance",
 					"description": "A maximum number to read the value",
 					"type": "float",
-					"default": null
+					"default": 0
 				},
 				{
 					"label": "min_value",
 					"description": "A minimum number to read the value",
 					"type": "float",
-					"default": null
+					"default": 0
 				},
 				{
 					"label": "feagi_index",
@@ -396,9 +396,9 @@
 					"description": "Minimum range detectable by the sensor.",
 					"type": "vector3",
 					"default": [
-						null,
-						null,
-						null
+						0,
+						0,
+						0
 					]
 				},
 				{
@@ -406,9 +406,9 @@
 					"description": "Maximum range detectable by the sensor",
 					"type": "vector3",
 					"default": [
-						null,
-						null,
-						null
+						0,
+						0,
+						0
 					]
 				},
 				{

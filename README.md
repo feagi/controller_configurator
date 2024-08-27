@@ -2,18 +2,23 @@
 
 [![GitHub Release](https://img.shields.io/github/v/release/feagi/controller_configurator)](https://github.com/feagi/controller_configurator/releases) [![Discord](https://img.shields.io/discord/1242546683791933480)](https://discord.gg/PTVC8fyGN8) [![GitHub License](https://img.shields.io/github/license/feagi/controller_configurator)](https://www.apache.org/licenses/LICENSE-2.0.txt)
 
-This Godot plugin allows for easily adding FEAGI integration with your Godot game!
+This [Godot](https://github.com/godotengine/godot) "Game" is a front end for creating, and modifying [FEAGI Connector](https://github.com/feagi/feagi-connector) configurations to connect applications and devices to FEAGI.
 
-![image](https://github.com/feagi/configurator/assets/127231771/3e9511f6-533a-4f6c-8cf0-a299918de5c1)
+![image](https://github.com/user-attachments/assets/2a5e4e1c-7372-4d39-ae6c-1fd042d1f0b1)
 
-This repo includes a demo of this plugin in use using the 'Dodge the Creeps' demo as well, to see how it can be used.
+# Using the FEAGI Configurator
+This application is essentially a stand alone web application, and can be accessed online here.
+You can also download the project and run it directly with Godot.
 
-## How To Use This Plugin
+# Contributing
+Please see our general contribution guide [here](https://github.com/feagi/feagi/blob/staging/CONTRIBUTING.md).
 
-1. Clone this repo.
-2. Open Godot. You can download it free from https://godotengine.org/download
-3. In Godot, go to Import and choose `project.godot` from this repo.
-4. Go to Project tab -> Tools -> Open FEAGI Configurator
-5. Click the "Run current scene" button in top right (play icon with four dots above)
-6. The FEAGI Configurator window will open. You can use the tabs and dropdowns to see your options. Click + to add a selected device type.
-7. When you are done selecting, go to the Import and Export tab and click the button to generate your JSON.
+For working on the Configurator specifically, please download the appropriate Godot editor version [here](https://godotengine.org/download/archive/4.3-stable/) and open a cloned copy of this repository with it. Keep in mind you will require an instance of FEAGI running.
+
+The Configurator builds its templates from "template.json", editing that allows you to edit and create new device types.
+
+# License
+FEAGI Configurator is distributed under the terms of the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0.txt).
+
+
+

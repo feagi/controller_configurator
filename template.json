@@ -324,13 +324,13 @@
 				{
 					"label": "max_value",
 					"description": "A maximum number to read the value",
-					"type": "integer",
+					"type": "float",
 					"default": 0
 				},
 				{
 					"label": "min_value",
 					"description": "A minimum number to read the value",
-					"type": "integer",
+					"type": "float",
 					"default": 0
 				},
 				{
@@ -357,7 +357,7 @@
 					"default": false
 				},
 				{
-					"label": "max_distance",
+					"label": "max_value",
 					"description": "A maximum number to read the value",
 					"type": "float",
 					"default": 0
@@ -435,13 +435,13 @@
 					"default": false
 				},
 				{
-					"label": "maximum_value",
+					"label": "max_value",
 					"description": "A maximum battery percentage",
 					"type": "percentage",
 					"default": 100
 				},
 				{
-					"label": "minimum_value",
+					"label": "min_value",
 					"description": "A minimum battery percentage",
 					"type": "percentage",
 					"default": 0

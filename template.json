@@ -155,7 +155,7 @@
 		}
 	},
 	"input": {
-		"infrared_sensor": {
+		"infrared": {
 			"label": "Infrared",
 			"description": "",
 			"parameters": [

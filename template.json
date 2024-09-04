@@ -65,12 +65,6 @@
 					"default": 0
 				},
 				{
-					"label": "rolling_window_len",
-					"description": "How many windows are needed to slow the motor to a stop.",
-					"type": "integer",
-					"default": 1
-				},
-				{
 					"label": "max_power",
 					"description": "max power to go full speed on your robot.",
 					"type": "float",
@@ -81,6 +75,13 @@
 					"description": "An index to place",
 					"type": "integer",
 					"default": 0
+				},
+				{
+					"label": "default_value",
+					"description": "A default value to set the servo to.",
+					"type": "float",
+					"default": 0,
+					"optional": true
 				}
 			]
 		},
@@ -155,7 +156,7 @@
 		}
 	},
 	"input": {
-		"infrared_sensor": {
+		"infrared": {
 			"label": "Infrared",
 			"description": "",
 			"parameters": [
@@ -306,7 +307,7 @@
 				}
 			]
 		},
-		"servo": {
+		"servo_position": {
 			"label": "Servo Position",
 			"description": "",
 			"parameters": [
@@ -324,13 +325,13 @@
 				{
 					"label": "max_value",
 					"description": "A maximum number to read the value",
-					"type": "integer",
+					"type": "float",
 					"default": 0
 				},
 				{
 					"label": "min_value",
 					"description": "A minimum number to read the value",
-					"type": "integer",
+					"type": "float",
 					"default": 0
 				},
 				{
@@ -357,7 +358,7 @@
 					"default": false
 				},
 				{
-					"label": "max_distance",
+					"label": "max_value",
 					"description": "A maximum number to read the value",
 					"type": "float",
 					"default": 0
@@ -435,13 +436,13 @@
 					"default": false
 				},
 				{
-					"label": "maximum_value",
+					"label": "max_value",
 					"description": "A maximum battery percentage",
 					"type": "percentage",
 					"default": 100
 				},
 				{
-					"label": "minimum_value",
+					"label": "min_value",
 					"description": "A minimum battery percentage",
 					"type": "percentage",
 					"default": 0

@@ -153,6 +153,29 @@
 					"default": 0
 				}
 			]
+		},
+		"recognition": {
+			"label": "ID Recognition",
+			"description": "",
+			"parameters": [
+				{
+					"label": "custom_name",
+					"description": "User defined name for the device.",
+					"type": "string"
+				},
+				{
+					"label": "disabled",
+					"description": "Disables the device when true.",
+					"type": "boolean",
+					"default": false
+				},
+				{
+					"label": "feagi_index",
+					"description": "An index to place",
+					"type": "integer",
+					"default": 0
+				}
+			]
 		}
 	},
 	"input": {
@@ -508,6 +531,29 @@
 					"default": 50,
 					"min": 1,
 					"max": 255
+				},
+				{
+					"label": "feagi_index",
+					"description": "An index to place",
+					"type": "integer",
+					"default": 0
+				}
+			]
+		},
+		"id_trainer": {
+			"label": "ID Trainer",
+			"description": "",
+			"parameters": [
+				{
+					"label": "custom_name",
+					"description": "User defined name for the device.",
+					"type": "string"
+				},
+				{
+					"label": "disabled",
+					"description": "Disables the device when true.",
+					"type": "boolean",
+					"default": false
 				},
 				{
 					"label": "feagi_index",

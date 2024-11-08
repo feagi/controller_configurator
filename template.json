@@ -245,6 +245,49 @@
 				}
 			]
 		},
+		"pressure": {
+			"label": "Pressure Sensor",
+			"description": "",
+			"parameters": [
+				{
+					"label": "custom_name",
+					"description": "User defined name for the device.",
+					"type": "string"
+				},
+				{
+					"label": "disabled",
+					"description": "Disables the device when true.",
+					"type": "boolean",
+					"default": false
+				},
+				{
+					"label": "min_value",
+					"description": "Minimum range detectable by the sensor.",
+					"type": "vector3",
+					"default": [
+						0.0,
+						0.0,
+						0.0
+					]
+				},
+				{
+					"label": "max_value",
+					"description": "Maximum range detectable by the sensor",
+					"type": "vector3",
+					"default": [
+						0.0,
+						0.0,
+						0.0
+					]
+				},
+				{
+					"label": "feagi_index",
+					"description": "An index to place",
+					"type": "integer",
+					"default": 0
+				}
+			]
+		},
 		"analog_input": {
 			"label": "Analog Input",
 			"description": "",

@@ -1,13 +1,13 @@
 extends AbstractParameter
 class_name Vector3Parameter
 
-var value: Vector3 = Vector3(0,0,0)
-var default: Vector3 = Vector3(0,0,0)
+@export var value: Vector3 = Vector3(0,0,0)
+@export var default: Vector3 = Vector3(0,0,0)
 
 ## Creates the instance of the object given the JSON dict
 static func create_from_template_JSON_dict(JSON_dict: Dictionary) -> Vector3Parameter:
 	var output: Vector3Parameter = Vector3Parameter.new()
-	output.fill_in_metadata_from_JSON_dict(JSON_dict)
+	output.fill_in_metadata_from_template_JSON_dict(JSON_dict)
 	if "default" in JSON_dict:
 		var arr = JSON_dict["default"]
 		if arr is not Array:
@@ -20,3 +20,8 @@ static func create_from_template_JSON_dict(JSON_dict: Dictionary) -> Vector3Para
 			
 
 	return output
+
+
+func _get_value_as_JSON() -> Variant:
+	assert(false, "Method not overridden!")
+	return [value.x, value.y, value.z]

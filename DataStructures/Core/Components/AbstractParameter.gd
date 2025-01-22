@@ -43,8 +43,18 @@ static func auto_create_from_template_JSON_dict_array(JSON_dicts: Array[Dictiona
 		output.append(result)
 	return output
 	
-func fill_in_metadata_from_JSON_dict(JSON_dict: Dictionary) -> void:
+func fill_in_metadata_from_template_JSON_dict(JSON_dict: Dictionary) -> void:
 	if "label" in JSON_dict:
 		label = JSON_dict["label"]
 	if "description" in JSON_dict:
 		description = JSON_dict["description"]
+
+## Returns the parameter as a JSOn formattable dict
+func get_as_JSON_formatable_dict() -> Dictionary:
+	return {label: _get_value_as_JSON()}
+
+## Returns the value of the object in a format that can be writted in a JSON. Should be overridden
+func _get_value_as_JSON() -> Variant:
+	assert(false, "Method not overridden!")
+	return null
+	

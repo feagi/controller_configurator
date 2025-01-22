@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://chs76xdua3013"]
+[gd_scene load_steps=2 format=3 uid="uid://chs76xdua3013"]
 
-[node name="Importer" type="Node2D"]
+[ext_resource type="Script" path="res://Steps/Importers/Existing FEAGI Robot Configuration/FeagiConfiguratorImporter.gd" id="1_yue23"]
+
+[node name="Importer" type="BoxContainer"]
+script = ExtResource("1_yue23")

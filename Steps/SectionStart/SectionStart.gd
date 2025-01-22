@@ -23,7 +23,7 @@ func _ready() -> void:
 	
 func _option_from_dropdown_selected(index: int) -> void:
 	var importer_scene_path: StringName = IMPORTERS_DIRECTORY + "/" + _import_methods_dropdown.get_item_text(index) + "/Importer.tscn"
-	if not FileAccess.file_exists(importer_scene_path):
+	if not ResourceLoader.exists(importer_scene_path):
 		_import_file_button.disabled = true
 		_import_file_button.tooltip_text = "Unable to load UI elements for this option!"
 		push_error("Unable to find scene 'Importer.tscn' from '%s'! Not allowing loading of the UI!" % importer_scene_path)
@@ -40,10 +40,43 @@ func _option_from_dropdown_selected(index: int) -> void:
 
 ## Attempts to load the importer by name. If succeeds, emits attempt_import, otherwise logs an error
 func _load_importer_UI() -> void:
-	var importer_type_by_name: StringName = _import_methods_dropdown.get_item_text(_import_methods_dropdown.selected)
-	var importer_scene_path: StringName = IMPORTERS_DIRECTORY + "/" + importer_type_by_name + "/Importer.tscn" # already checked this is valid	
-	var importer: BaseConfigImporter = load(str(importer_scene_path)).instantiate()
+	var importer: BaseConfigImporter = _try_to_get_importer_from_dropdown_selection()
+	if !importer:
+		push_error("Unable to load config importer UI!")
+		return
 	
-	
+	if OS.get_name() != "HTML5":
+		# use this method to get file
+		var file_selector: FileDialog = FileDialog.new()
+		file_selector.use_native_dialog = true
+		file_selector.add_filter("*." + importer.get_expected_file_extension())
+		file_selector.title = "Select your file to import"
+		file_selector.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+		file_selector.file_selected.connect(_non_HTML_filebrowser_picked)
+		file_selector.show()
+	# TODO HTML5 JS interactions
+
+
 func _create_scratch_pressed() -> void:
 	create_from_scratch.emit()
+
+func _non_HTML_filebrowser_picked(path: StringName) -> void:
+	var bytes: PackedByteArray = FileAccess.get_file_as_bytes(path)
+	if len(bytes) == 0:
+		push_error("Unable to open the file at path '%s'!" % path)
+		return
+	
+	attempt_import.emit(_try_to_get_importer_from_dropdown_selection(), bytes)
+
+## Attempts to return the importer UI object as per the drop down. Returns null if something is wrong
+func _try_to_get_importer_from_dropdown_selection() -> BaseConfigImporter:
+	if _import_methods_dropdown.selected == -1:
+		return null
+	var importer_type_by_name: StringName = _import_methods_dropdown.get_item_text(_import_methods_dropdown.selected)
+	var importer_scene_path: StringName = IMPORTERS_DIRECTORY + "/" + importer_type_by_name + "/Importer.tscn"
+	if not ResourceLoader.exists(importer_scene_path):
+		return null
+	var importer_check = load(str(importer_scene_path)).instantiate()
+	if importer_check is not BaseConfigImporter:
+		return null
+	return importer_check as BaseConfigImporter

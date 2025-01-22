@@ -7,5 +7,11 @@ signal UI_import_fail() ## User clicked back or import is broken, this exists th
 
 
 ## Given the data the user loaded, verify it is valid, and update your UI accordingly
-func loaded_input_data(data: PackedByteArray) -> void:
+func loaded_input_data(_data: PackedByteArray) -> void:
+	assert(false, "This method was not overridden!")
 	pass # fill in function in your use case
+
+## This should return the expected file extension as a string
+func get_expected_file_extension() -> StringName:
+	assert(false, "This method was not overridden!")
+	return ""

@@ -18,7 +18,9 @@ static func create_from_template(JSON_dict: Dictionary, device_key_name: StringN
 	if "description" in JSON_dict:
 		output.description = JSON_dict['description']
 	if "parameters" in JSON_dict:
-		output.parameters = AbstractParameter.auto_create_from_template_JSON_dict_array(JSON_dict["parameters"])
+		var params: Array[Dictionary]
+		params.assign(JSON_dict["parameters"])
+		output.parameters = AbstractParameter.auto_create_from_template_JSON_dict_array(params)
 	return output
 	
 func get_as_JSON_formatable_dict(device_ID_index: int) -> Dictionary:

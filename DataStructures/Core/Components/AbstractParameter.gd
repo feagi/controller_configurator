@@ -8,7 +8,7 @@ class_name AbstractParameter
 # NOTE: All [AbstractParameter] classes should have a value called "value" of their associated data type!
 
 ## Creates the instance of the object given the JSON dict
-static func create_from_template_JSON_dict(JSON_dict: Dictionary) -> AbstractParameter:
+static func create_from_template_JSON_dict(_JSON_dict: Dictionary) -> AbstractParameter:
 	assert(false, "Method not overridden!")
 	return null
 
@@ -26,6 +26,8 @@ static func auto_create_from_template_JSON_dict(JSON_dict: Dictionary) -> Abstra
 			return IntegerParameter.create_from_template_JSON_dict(JSON_dict)
 		"float":
 			return FloatParameter.create_from_template_JSON_dict(JSON_dict)
+		"percentage":
+			return PercentageParameter.create_from_template_JSON_dict(JSON_dict)
 		"vector3":
 			return Vector3Parameter.create_from_template_JSON_dict(JSON_dict)
 		"object":
@@ -37,7 +39,7 @@ static func auto_create_from_template_JSON_dict(JSON_dict: Dictionary) -> Abstra
 static func auto_create_from_template_JSON_dict_array(JSON_dicts: Array[Dictionary]) -> Array[AbstractParameter]:
 	var output: Array[AbstractParameter] = []
 	for JSON_dict in JSON_dicts:
-		var result: AbstractParameter = AbstractParameter.create_from_template_JSON_dict(JSON_dict)
+		var result: AbstractParameter = AbstractParameter.auto_create_from_template_JSON_dict(JSON_dict)
 		if !result:
 			continue
 		output.append(result)

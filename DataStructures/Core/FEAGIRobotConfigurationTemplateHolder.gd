@@ -12,7 +12,7 @@ func fill_template_cache_from_template_JSON() -> void:
 	if !template_dict or len(template_dict) == 0:
 		assert(false, "Unable to read template JSON!")
 	assert("input" in template_dict, "Unable to read inputs from template JSON!")
-	assert("outputs" in template_dict, "Unable to read outputs from template JSON!")
+	assert("output" in template_dict, "Unable to read outputs from template JSON!")
 	_write_device_templates_to(_cached_input_device_templates, template_dict["input"], true)
 	_write_device_templates_to(_cached_output_device_templates, template_dict["output"], false)
 
@@ -25,7 +25,7 @@ func get_possible_devices_from_template_cache(from_input: bool) -> Array[StringN
 		output.assign(_cached_output_device_templates.keys())
 	return output
 
-## From the template, tries to spawn a copy of a device by name. Returns null if device is invalid
+## From the template, tries to spawn a copy of a device by name. Returns null if device name is invalid
 func spawn_device_from_template(device_name: StringName, is_input_device: bool) -> FEAGIDevice:
 	var dict_ref: Dictionary = _cached_output_device_templates
 	if is_input_device:

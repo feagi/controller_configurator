@@ -18,7 +18,7 @@ static func create_from_template_JSON_dict(JSON_dict: Dictionary) -> ObjectParam
 			if sub_dict is not Dictionary:
 				push_error("Expected parameter array element to be a parameter JSON for object parameter %s!" % output.label)
 				continue
-			output.value.append(AbstractParameter.create_from_template_JSON_dict(sub_dict))
+			output.value.append(AbstractParameter.auto_create_from_template_JSON_dict(sub_dict))
 	return output
 
 func _get_value_as_JSON() -> Variant:

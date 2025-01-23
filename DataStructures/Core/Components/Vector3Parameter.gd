@@ -4,6 +4,9 @@ class_name Vector3Parameter
 @export var value: Vector3 = Vector3(0,0,0)
 @export var default: Vector3 = Vector3(0,0,0)
 
+func _init() -> void:
+	value_type = TYPE_ARRAY # the type in the json is an array
+
 ## Creates the instance of the object given the JSON dict
 static func create_from_template_JSON_dict(JSON_dict: Dictionary) -> Vector3Parameter:
 	var output: Vector3Parameter = Vector3Parameter.new()

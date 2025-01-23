@@ -55,3 +55,6 @@ vertical = true
 
 [node name="SectionStart" parent="MarginContainer/BoxContainer/PanelContainer/MarginContainer/StepsHolder" instance=ExtResource("2_fj0xn")]
 layout_mode = 2
+
+[connection signal="attempt_import" from="MarginContainer/BoxContainer/PanelContainer/MarginContainer/StepsHolder/SectionStart" to="." method="_import_file"]
+[connection signal="create_from_scratch" from="MarginContainer/BoxContainer/PanelContainer/MarginContainer/StepsHolder/SectionStart" to="." method="_build_from_scratch"]

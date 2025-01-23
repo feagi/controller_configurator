@@ -6,6 +6,9 @@ class_name IntegerParameter
 @export var minimum: int = 0
 @export var maximum: int = 100
 
+func _init() -> void:
+	value_type = TYPE_INT
+
 ## Creates the instance of the object given the JSON dict
 static func create_from_template_JSON_dict(JSON_dict: Dictionary) -> IntegerParameter:
 	var output: IntegerParameter = IntegerParameter.new()

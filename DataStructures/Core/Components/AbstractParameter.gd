@@ -4,8 +4,12 @@ class_name AbstractParameter
 
 @export var label: StringName
 @export var description: StringName
+var value_type: Variant.Type
 
 # NOTE: All [AbstractParameter] classes should have a value called "value" of their associated data type!
+
+func _init() -> void:
+	value_type = TYPE_NIL
 
 ## Creates the instance of the object given the JSON dict
 static func create_from_template_JSON_dict(_JSON_dict: Dictionary) -> AbstractParameter:

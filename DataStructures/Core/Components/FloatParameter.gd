@@ -6,6 +6,9 @@ class_name FloatParameter
 @export var minimum: float = 0
 @export var maximum: float = 100
 
+func _init() -> void:
+	value_type = TYPE_FLOAT
+
 ## Creates the instance of the object given the JSON dict
 static func create_from_template_JSON_dict(JSON_dict: Dictionary) -> FloatParameter:
 	var output: FloatParameter = FloatParameter.new()

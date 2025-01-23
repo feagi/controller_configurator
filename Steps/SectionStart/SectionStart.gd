@@ -3,7 +3,7 @@ class_name SectionStart
 
 const IMPORTERS_DIRECTORY: StringName = "res://Steps/Importers/"
 
-signal attempt_import(import_UI: BaseConfigImporter, imported_data: PackedByteArray)
+signal attempt_import(import_UI: BaseConfigImporter, imported_data: PackedByteArray, file_name: StringName)
 signal create_from_scratch()
 
 var _import_methods_dropdown: OptionButton
@@ -20,7 +20,12 @@ func _ready() -> void:
 	for import_options_folder in import_options_folders:
 		_import_methods_dropdown.add_item(import_options_folder)
 	_import_methods_dropdown.selected = -1
-	
+
+
+func reset_UI() -> void:
+	_import_methods_dropdown.selected = -1
+
+
 func _option_from_dropdown_selected(index: int) -> void:
 	var importer_scene_path: StringName = IMPORTERS_DIRECTORY + "/" + _import_methods_dropdown.get_item_text(index) + "/Importer.tscn"
 	if not ResourceLoader.exists(importer_scene_path):
@@ -66,7 +71,8 @@ func _non_HTML_filebrowser_picked(path: StringName) -> void:
 		push_error("Unable to open the file at path '%s'!" % path)
 		return
 	
-	attempt_import.emit(_try_to_get_importer_from_dropdown_selection(), bytes)
+	path = path.split("/")[-1] # get filename
+	attempt_import.emit(_try_to_get_importer_from_dropdown_selection(), bytes, path)
 
 ## Attempts to return the importer UI object as per the drop down. Returns null if something is wrong
 func _try_to_get_importer_from_dropdown_selection() -> BaseConfigImporter:

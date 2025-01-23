@@ -85,6 +85,8 @@ func _load_devices(array_target: Array[FEAGIDevice], devices_JSON_dict: Dictiona
 			
 			var device_JSON_dict: Dictionary = devices_JSON_dict[device_type][device_ID]
 			var device: FEAGIDevice = feagi_template.spawn_device_from_template(device_type, is_input)
+			# we need to patch any [ObjectParameter] definitions
+			
 			device.overwrite_parameter_values(device_JSON_dict)
 			array_target.append(device)
 			

@@ -25,25 +25,32 @@ static func create_from_template(JSON_dict: Dictionary, device_key_name: StringN
 
 ## Attempts to update multiple parameters by their label names key'd to their value
 func overwrite_parameter_values(parameter_labels_and_values: Dictionary) -> void:
-	for parameter_label in parameter_labels_and_values: # NOTE: This isnt particularly efficient since we are using for loops twice. Too bad!
-		overwrite_parameter_value(parameter_label, parameter_labels_and_values[parameter_label])
-		
-## Attempts to overwrite the parameter by name of the device. Returns true if success 
-func overwrite_parameter_value(parameter_label: StringName, value: Variant) -> bool:
-	for parameter in parameters:
-		if parameter_label == parameter.label:
-			if typeof(value) == parameter.value_type:
-				parameter.value = value
-				return true
-			else:
-				push_error("Unable to update parameter %s of device %s as parameter is of type %s and given value is %s!" % [parameter_label, label, type_string(parameter.value_type), type_string(typeof(value))])
-				return false
-		continue
-	push_error("Unable to find parameter %s to update in device %s!" % [parameter_label, label])
-	return false
+	_overwrite_sub_parameter_values(parameter_labels_and_values, parameters) # NOTE: This isnt particularly efficient since we are using for loops twice. Too bad!
+
+func _overwrite_sub_parameter_values(subparameter_labels_and_values: Dictionary, processing_array: Array[AbstractParameter]) -> void:
+	for subparameter_label in subparameter_labels_and_values:
+		_overwrite_sub_parameter(subparameter_label, subparameter_labels_and_values[subparameter_label], processing_array)
 
 func get_as_JSON_formatable_dict(device_ID_index: int) -> Dictionary:
 	var parameter_JSONable: Dictionary = {}
 	for parameter in parameters:
 		parameter_JSONable.merge(parameter.get_as_JSON_formatable_dict())
 	return {str(device_ID_index): parameter_JSONable}
+
+## Overwrites values of parameters, returns true if successful. Recursive in the case of [ObjectParameter]
+func _overwrite_sub_parameter(parameter_label: StringName, value: Variant, parameters_array: Array[AbstractParameter]) -> bool:
+	for parameter in parameters_array:
+		if parameter_label == parameter.label:
+			if typeof(value) == parameter.value_type:
+				if parameter is ObjectParameter: # special case given dicts / values
+					_overwrite_sub_parameter_values(value, parameter.value)
+					return true
+				else:
+					parameter.value = value
+					return true
+			else:
+				push_error("Unable to update parameter %s of device %s as parameter is of type %s and given value is %s!" % [parameter_label, label, type_string(parameter.value_type), type_string(typeof(value))])
+				return false
+		continue
+	push_error("Unable to find parameter %s to update in device %s!" % [parameter_label, label])
+	return false

@@ -41,6 +41,7 @@ func is_device_type_valid(device_type: StringName, is_input: bool) -> bool:
 	else:
 		return device_type in _cached_output_device_templates
 
+
 func _write_device_templates_to(target_write: Dictionary, template_IO_source: Dictionary, is_input: bool) -> void:
 	# where "template_IO_source" is CONFIG_JSON[output/input]
 	for device_name in template_IO_source:

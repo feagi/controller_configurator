@@ -5,7 +5,7 @@ class_name ObjectParameter
 @export var value: Array[AbstractParameter] = []
 
 func _init() -> void:
-	value_type = TYPE_DICTIONARY # The value in the json isa  dictionary
+	value_type = TYPE_DICTIONARY # The value in the json is a dictionary
 
 ## Creates the instance of the object given the JSON dict
 static func create_from_template_JSON_dict(JSON_dict: Dictionary) -> ObjectParameter:

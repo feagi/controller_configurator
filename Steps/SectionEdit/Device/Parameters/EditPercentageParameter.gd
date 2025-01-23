@@ -16,5 +16,5 @@ func setup(parameter: PercentageParameter) -> void:
 
 func export() -> AbstractParameter:
 	var parameter: PercentageParameter = super()
-	parameter.value = _percentage.value
+	parameter.value = int(_percentage.value)
 	return parameter

@@ -16,5 +16,5 @@ func setup(parameter: IntegerParameter) -> void:
 
 func export() -> AbstractParameter:
 	var parameter: IntegerParameter = super()
-	parameter.value = _int.value
+	parameter.value = int(_int.value)
 	return parameter

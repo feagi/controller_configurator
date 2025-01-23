@@ -15,10 +15,6 @@ config/description="Generates configuration files for use with FEAGI connectors"
 run/main_scene="res://ConfiguratorMain.tscn"
 config/features=PackedStringArray("4.4")
 
-[autoload]
-
-Template="*res://JSONTemplate.gd"
-
 [debug]
 
 settings/crash_handler/message="Please Submit an issue to FEAGI/Contoller_Configurator"
@@ -35,10 +31,6 @@ window/size/window_height_override=720
 [editor_plugins]
 
 enabled=PackedStringArray()
-
-[gui]
-
-theme/custom="res://UI_Components/Theme.tres"
 
 [input]
 

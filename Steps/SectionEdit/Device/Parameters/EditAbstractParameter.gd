@@ -31,6 +31,8 @@ static func spawn_and_add_parameter_editor(parameter: AbstractParameter, parent_
 		(edit_UI as EditStringParameter).setup(parameter)
 	else:
 		push_error("No UI defined for given parameter type!")
+		return null
+	parent_to_be.add_child(edit_UI)
 	return edit_UI
 
 func base_setup(parameter: AbstractParameter) -> void:

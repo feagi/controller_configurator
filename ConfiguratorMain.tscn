@@ -63,3 +63,4 @@ layout_mode = 2
 
 [connection signal="attempt_import" from="MarginContainer/BoxContainer/PanelContainer/MarginContainer/StepsHolder/SectionStart" to="." method="_import_file"]
 [connection signal="create_from_scratch" from="MarginContainer/BoxContainer/PanelContainer/MarginContainer/StepsHolder/SectionStart" to="." method="_build_from_scratch"]
+[connection signal="user_requests_going_back" from="MarginContainer/BoxContainer/PanelContainer/MarginContainer/StepsHolder/SectionEdit" to="." method="_revert_to_start"]

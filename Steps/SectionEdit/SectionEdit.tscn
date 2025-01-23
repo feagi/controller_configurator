@@ -1,18 +1,20 @@
 [gd_scene load_steps=3 format=3 uid="uid://kdbkx6ie3i17"]
 
-[ext_resource type="Script" uid="uid://b35c5lhjp6xo0" path="res://UI_Components/Device/IO/io.gd" id="1_mg7qj"]
-[ext_resource type="Script" uid="uid://txj20boik5fu" path="res://UI_Components/Device/IO/IODropDown.gd" id="2_0wgjb"]
+[ext_resource type="Script" uid="uid://dre4v2emapkr4" path="res://Steps/SectionEdit/Device/EditIO.gd" id="1_d1q2l"]
+[ext_resource type="Script" uid="uid://5ijq7nsu4seg" path="res://Steps/SectionEdit/SectionEdit.gd" id="1_mg7qj"]
 
 [node name="SectionEdit" type="BoxContainer"]
 offset_right = 1280.0
 offset_bottom = 720.0
 theme_override_constants/separation = 16
+script = ExtResource("1_mg7qj")
 
 [node name="Inputs" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
-script = ExtResource("1_mg7qj")
+script = ExtResource("1_d1q2l")
+is_input = true
 metadata/_tab_index = 0
 
 [node name="Label" type="Label" parent="Inputs"]
@@ -32,9 +34,9 @@ text = "Add Input: "
 layout_mode = 2
 size_flags_horizontal = 3
 fit_to_longest_item = false
-script = ExtResource("2_0wgjb")
 
 [node name="Button" type="Button" parent="Inputs/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 text = "+"
 
@@ -58,7 +60,7 @@ theme_override_constants/separation = 32
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
-script = ExtResource("1_mg7qj")
+script = ExtResource("1_d1q2l")
 metadata/_tab_index = 0
 
 [node name="Label" type="Label" parent="Outputs"]
@@ -78,9 +80,9 @@ text = "Add Ouput:"
 layout_mode = 2
 size_flags_horizontal = 3
 fit_to_longest_item = false
-script = ExtResource("2_0wgjb")
 
 [node name="Button" type="Button" parent="Outputs/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 text = "+"
 
@@ -103,6 +105,23 @@ theme_override_constants/separation = 32
 [node name="Finalize" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Finalize"]
+layout_mode = 2
+alignment = 2
+
+[node name="Button" type="Button" parent="Finalize/HBoxContainer"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+text = "Back"
+
+[node name="Button2" type="Button" parent="Finalize/HBoxContainer"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+text = "Save"
 
 [connection signal="pressed" from="Inputs/HBoxContainer/Button" to="Inputs" method="_add_device_button_pressed"]
 [connection signal="pressed" from="Outputs/HBoxContainer/Button" to="Outputs" method="_add_device_button_pressed"]
+[connection signal="pressed" from="Finalize/HBoxContainer/Button" to="." method="_user_pressed_back"]
+[connection signal="pressed" from="Finalize/HBoxContainer/Button2" to="." method="_user_requests_saving_config"]

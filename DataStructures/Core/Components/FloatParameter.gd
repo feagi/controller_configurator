@@ -1,7 +1,7 @@
 extends AbstractParameter
 class_name FloatParameter
 
-@export var value: float = 0
+@export var value: float = NAN # use default if NAN cause not initialized
 @export var default: float = 0
 @export var minimum: float = 0
 @export var maximum: float = 100

@@ -31,6 +31,7 @@ func _overwrite_sub_parameter_values(subparameter_labels_and_values: Dictionary,
 	for subparameter_label in subparameter_labels_and_values:
 		_overwrite_sub_parameter(subparameter_label, subparameter_labels_and_values[subparameter_label], processing_array)
 
+## Returns dictionary of {"device_index" : { properties }}
 func get_as_JSON_formatable_dict(device_ID_index: int) -> Dictionary:
 	var parameter_JSONable: Dictionary = {}
 	for parameter in parameters:

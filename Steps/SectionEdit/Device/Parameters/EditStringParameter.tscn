@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cup1av784ay1i"]
+[gd_scene load_steps=2 format=3 uid="uid://brahba5bxp4gm"]
 
-[ext_resource type="Script" path="res://UI_Components/Parameters/CompString.gd" id="1_tx5sj"]
+[ext_resource type="Script" uid="uid://bk3aqtk5418i2" path="res://Steps/SectionEdit/Device/Parameters/EditStringParameter.gd" id="1_7e7ky"]
 
 [node name="String" type="HBoxContainer"]
-script = ExtResource("1_tx5sj")
+script = ExtResource("1_7e7ky")
 
 [node name="Label" type="Label" parent="."]
 custom_minimum_size = Vector2(100, 0)

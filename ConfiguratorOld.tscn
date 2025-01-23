@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d2cq6iyf210ie"]
 
-[ext_resource type="Script" path="res://configurator.gd" id="1_kfks2"]
+[ext_resource type="Script" uid="uid://bdtua3n38ytnh" path="res://configurator.gd" id="1_kfks2"]
 [ext_resource type="PackedScene" uid="uid://cle432y1b702p" path="res://UI_Components/Device/IO/IO.tscn" id="2_cwwo0"]
 
 [node name="Configurator" type="PanelContainer"]
@@ -38,14 +38,14 @@ size_flags_vertical = 3
 
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer/PanelContainer"]
 layout_mode = 2
-current_tab = 1
+current_tab = 0
 
 [node name="Sensory" parent="VBoxContainer/PanelContainer/TabContainer" instance=ExtResource("2_cwwo0")]
-visible = false
 layout_mode = 2
 header_text = &"Sensory"
 
 [node name="Motor" parent="VBoxContainer/PanelContainer/TabContainer" instance=ExtResource("2_cwwo0")]
+visible = false
 layout_mode = 2
 header_text = &"Motor"
 metadata/_tab_index = 1

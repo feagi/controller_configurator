@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://lqsiulg06gl2"]
+[gd_scene load_steps=4 format=3 uid="uid://lqsiulg06gl2"]
 
 [ext_resource type="Script" uid="uid://co5xl5adv5r0r" path="res://ConfiguratorMain.gd" id="1_lri3c"]
 [ext_resource type="PackedScene" uid="uid://dqr3j76ykm3t6" path="res://Steps/SectionStart/SectionStart.tscn" id="2_fj0xn"]
+[ext_resource type="PackedScene" uid="uid://kdbkx6ie3i17" path="res://Steps/SectionEdit/SectionEdit.tscn" id="3_xqg6n"]
 
 [node name="ConfiguratorMain" type="PanelContainer"]
 anchors_preset = 15
@@ -54,6 +55,10 @@ layout_mode = 2
 vertical = true
 
 [node name="SectionStart" parent="MarginContainer/BoxContainer/PanelContainer/MarginContainer/StepsHolder" instance=ExtResource("2_fj0xn")]
+layout_mode = 2
+
+[node name="SectionEdit" parent="MarginContainer/BoxContainer/PanelContainer/MarginContainer/StepsHolder" instance=ExtResource("3_xqg6n")]
+visible = false
 layout_mode = 2
 
 [connection signal="attempt_import" from="MarginContainer/BoxContainer/PanelContainer/MarginContainer/StepsHolder/SectionStart" to="." method="_import_file"]

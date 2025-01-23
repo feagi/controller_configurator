@@ -1,0 +1,108 @@
+[gd_scene load_steps=3 format=3 uid="uid://kdbkx6ie3i17"]
+
+[ext_resource type="Script" uid="uid://b35c5lhjp6xo0" path="res://UI_Components/Device/IO/io.gd" id="1_mg7qj"]
+[ext_resource type="Script" uid="uid://txj20boik5fu" path="res://UI_Components/Device/IO/IODropDown.gd" id="2_0wgjb"]
+
+[node name="SectionEdit" type="BoxContainer"]
+offset_right = 1280.0
+offset_bottom = 720.0
+theme_override_constants/separation = 16
+
+[node name="Inputs" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+script = ExtResource("1_mg7qj")
+metadata/_tab_index = 0
+
+[node name="Label" type="Label" parent="Inputs"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Input"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Inputs"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Inputs/HBoxContainer"]
+layout_mode = 2
+text = "Add Input: "
+
+[node name="OptionButton" type="OptionButton" parent="Inputs/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+fit_to_longest_item = false
+script = ExtResource("2_0wgjb")
+
+[node name="Button" type="Button" parent="Inputs/HBoxContainer"]
+layout_mode = 2
+text = "+"
+
+[node name="PanelContainer" type="PanelContainer" parent="Inputs"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"Background_2"
+
+[node name="MarginContainer" type="MarginContainer" parent="Inputs/PanelContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Inputs/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Inputs/PanelContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 32
+
+[node name="Outputs" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+script = ExtResource("1_mg7qj")
+metadata/_tab_index = 0
+
+[node name="Label" type="Label" parent="Outputs"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Output"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Outputs"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Outputs/HBoxContainer"]
+layout_mode = 2
+text = "Add Ouput:"
+
+[node name="OptionButton" type="OptionButton" parent="Outputs/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+fit_to_longest_item = false
+script = ExtResource("2_0wgjb")
+
+[node name="Button" type="Button" parent="Outputs/HBoxContainer"]
+layout_mode = 2
+text = "+"
+
+[node name="PanelContainer" type="PanelContainer" parent="Outputs"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"Background_2"
+
+[node name="MarginContainer" type="MarginContainer" parent="Outputs/PanelContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Outputs/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Outputs/PanelContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 32
+
+[node name="Finalize" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="Inputs/HBoxContainer/Button" to="Inputs" method="_add_device_button_pressed"]
+[connection signal="pressed" from="Outputs/HBoxContainer/Button" to="Outputs" method="_add_device_button_pressed"]

@@ -1,7 +1,7 @@
 extends AbstractParameter
 class_name PercentageParameter
 
-@export var value: int = 0 # out of 100
+@export var value: int = IntegerParameter.NAN_EQUIVILANT_FOR_INT # out of 100
 @export var default: int = 0
 @export var minimum: int = 0
 @export var maximum: int = 100

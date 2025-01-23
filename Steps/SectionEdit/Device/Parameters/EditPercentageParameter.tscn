@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dlu3qlcsccpjq"]
+[gd_scene load_steps=2 format=3 uid="uid://c76auen1707o1"]
 
-[ext_resource type="Script" path="res://UI_Components/Parameters/CompPercentage.gd" id="1_4ic7p"]
+[ext_resource type="Script" uid="uid://bqq6wrxrrkh3m" path="res://Steps/SectionEdit/Device/Parameters/EditPercentageParameter.gd" id="1_yslg5"]
 
 [node name="Percentage" type="HBoxContainer"]
-script = ExtResource("1_4ic7p")
+script = ExtResource("1_yslg5")
 
 [node name="Label" type="Label" parent="."]
 custom_minimum_size = Vector2(100, 0)

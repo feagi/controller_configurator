@@ -1,7 +1,9 @@
 extends AbstractParameter
 class_name IntegerParameter
 
-@export var value: int = 0
+const NAN_EQUIVILANT_FOR_INT: int = -9929731 # treating this as NAN for comparisons. Yes this is stupid practice. Hopefully this number never occurs in our work
+
+@export var value: int = NAN_EQUIVILANT_FOR_INT
 @export var default: int = 0
 @export var minimum: int = 0
 @export var maximum: int = 100

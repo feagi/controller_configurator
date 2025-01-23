@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwrje845fsuf4"]
+[gd_scene load_steps=2 format=3 uid="uid://dg7pi53nln5i0"]
 
-[ext_resource type="Script" path="res://UI_Components/Parameters/CompFloat.gd" id="1_2h648"]
+[ext_resource type="Script" uid="uid://c2xubaljm4hag" path="res://Steps/SectionEdit/Device/Parameters/EditFloatParameter.gd" id="1_3mq5h"]
 
 [node name="Float" type="HBoxContainer"]
-script = ExtResource("1_2h648")
+script = ExtResource("1_3mq5h")
 
 [node name="Label" type="Label" parent="."]
 custom_minimum_size = Vector2(100, 0)
@@ -17,5 +17,5 @@ layout_mode = 2
 size_flags_horizontal = 3
 min_value = -9999.0
 max_value = 9999.0
-step = 0.0
+step = 0.1
 custom_arrow_step = 0.25

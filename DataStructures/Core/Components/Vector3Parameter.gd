@@ -1,7 +1,7 @@
 extends AbstractParameter
 class_name Vector3Parameter
 
-@export var value: Vector3 = Vector3(0,0,0)
+@export var value: Vector3 = Vector3(IntegerParameter.NAN_EQUIVILANT_FOR_INT,IntegerParameter.NAN_EQUIVILANT_FOR_INT,IntegerParameter.NAN_EQUIVILANT_FOR_INT)
 @export var default: Vector3 = Vector3(0,0,0)
 
 func _init() -> void:

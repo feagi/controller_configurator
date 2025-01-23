@@ -13,7 +13,7 @@ config_version=5
 config/name="FEAGI Configurator"
 config/description="Generates configuration files for use with FEAGI connectors"
 run/main_scene="res://ConfiguratorMain.tscn"
-config/features=PackedStringArray("4.3")
+config/features=PackedStringArray("4.4")
 
 [autoload]
 

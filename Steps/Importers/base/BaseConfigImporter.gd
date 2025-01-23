@@ -7,7 +7,7 @@ signal UI_import_fail() ## User clicked back or import is broken, this exists th
 
 
 ## Called on UI startup. Loads the raw bytes of the data. Make sure to verify data to be valid
-func load_input_data(_data: PackedByteArray, feagi_template: FEAGIRobotConfigurationTemplateHolder, file_name: StringName) -> void:
+func load_input_data(_data: PackedByteArray, _feagi_template: FEAGIRobotConfigurationTemplateHolder, _file_name: StringName) -> void:
 	assert(false, "This method was not overridden!")
 	pass # fill in function in your use case
 

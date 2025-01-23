@@ -35,5 +35,5 @@ func _import_file(UI: BaseConfigImporter, data: PackedByteArray, file_name: Stri
 func _build_from_scratch() -> void:
 	pass
 
-func _display_robot_config(robot_config: FEAGIRobotConfiguration) -> void:
+func _display_robot_config(_robot_config: FEAGIRobotConfiguration) -> void:
 	pass

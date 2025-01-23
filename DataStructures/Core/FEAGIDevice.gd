@@ -41,6 +41,8 @@ func get_as_JSON_formatable_dict(device_ID_index: int) -> Dictionary:
 func _overwrite_sub_parameter(parameter_label: StringName, value: Variant, parameters_array: Array[AbstractParameter]) -> bool:
 	for parameter in parameters_array:
 		if parameter_label == parameter.label:
+			if typeof(value) == TYPE_FLOAT and parameter.value_type == TYPE_INT: # fix cast
+				value = int(value)
 			if typeof(value) == parameter.value_type:
 				if parameter is ObjectParameter: # special case given dicts / values
 					_overwrite_sub_parameter_values(value, parameter.value)

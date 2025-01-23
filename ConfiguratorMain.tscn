@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://lqsiulg06gl2"]
 
-[ext_resource type="Script" path="res://ConfiguratorMain.gd" id="1_lri3c"]
+[ext_resource type="Script" uid="uid://di5n5aolsw4fs" path="res://ConfiguratorMain.gd" id="1_lri3c"]
 [ext_resource type="PackedScene" uid="uid://dqr3j76ykm3t6" path="res://Steps/SectionStart/SectionStart.tscn" id="2_fj0xn"]
 
 [node name="ConfiguratorMain" type="PanelContainer"]

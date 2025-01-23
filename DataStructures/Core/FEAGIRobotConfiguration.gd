@@ -10,4 +10,5 @@ static func create_from_device_listings(input_devices: Array[FEAGIDevice], outpu
 	var output: FEAGIRobotConfiguration = FEAGIRobotConfiguration.new()
 	output.inputs = input_devices
 	output.outputs = output_devices
+	output.description = robot_description
 	return output

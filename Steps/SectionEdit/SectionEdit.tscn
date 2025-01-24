@@ -121,7 +121,7 @@ custom_minimum_size = Vector2(128, 64)
 layout_mode = 2
 text = "Save"
 
-[connection signal="pressed" from="Inputs/HBoxContainer/Button" to="Inputs" method="_add_device_button_pressed"]
-[connection signal="pressed" from="Outputs/HBoxContainer/Button" to="Outputs" method="_add_device_button_pressed"]
+[connection signal="pressed" from="Inputs/HBoxContainer/Button" to="Inputs" method="_user_pressed_add_button"]
+[connection signal="pressed" from="Outputs/HBoxContainer/Button" to="Outputs" method="_user_pressed_add_button"]
 [connection signal="pressed" from="Finalize/HBoxContainer/Button" to="." method="_user_pressed_back"]
 [connection signal="pressed" from="Finalize/HBoxContainer/Button2" to="." method="_user_requests_saving_config"]

@@ -9,11 +9,9 @@ var _is_input: bool
 var _box: VBoxContainer
 var _header: Label
 
-func _ready() -> void:
+func setup(is_input: bool, title: StringName, description: StringName) -> void:
 	_box = $DeviceType
 	_header = $DeviceType/HBoxContainer/Label
-
-func setup(is_input: bool, title: StringName, description: StringName) -> void:
 	_is_input = is_input
 	name = title
 	_header.text = title

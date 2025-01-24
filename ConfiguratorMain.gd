@@ -45,3 +45,6 @@ func _display_robot_config(robot_config: FEAGIRobotConfiguration) -> void:
 	_section_edit.visible = true
 	_section_start.visible = false
 	_section_edit.load_config(robot_config)
+	if _section_config_importer:
+		_section_config_importer.queue_free()
+		_section_config_importer = null

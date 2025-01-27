@@ -11,5 +11,5 @@ func setup(parameter: StringParameter) -> void:
 
 func export() -> AbstractParameter:
 	var parameter: StringParameter = super()
-	parameter.value = _string.value
+	parameter.value = _string.text
 	return parameter

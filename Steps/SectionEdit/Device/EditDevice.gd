@@ -20,10 +20,10 @@ func setup_Device(device_definition: FEAGIDevice) -> void:
 	refresh_device_ID_label()
 
 func refresh_device_ID_label() -> void:
-	_header.text = "Device " + str(get_physical_ID())
+	_header.text = "Device ID: " + str(get_physical_ID())
 
 func get_physical_ID() -> int:
-	return get_index() - 1
+	return get_index() + 1
 
 func export() -> FEAGIDevice:
 	var output: FEAGIDevice = FEAGIDevice.new()

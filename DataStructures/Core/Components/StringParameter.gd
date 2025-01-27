@@ -13,5 +13,4 @@ static func create_from_template_JSON_dict(JSON_dict: Dictionary) -> StringParam
 	return output
 
 func _get_value_as_JSON() -> Variant:
-	assert(false, "Method not overridden!")
 	return value

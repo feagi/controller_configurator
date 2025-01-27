@@ -25,7 +25,6 @@ static func create_from_template_JSON_dict(JSON_dict: Dictionary) -> ObjectParam
 	return output
 
 func _get_value_as_JSON() -> Variant:
-	assert(false, "Method not overridden!")
 	var output: Dictionary = {}
 	for val in value:
 		output.merge(val.get_as_JSON_formatable_dict())

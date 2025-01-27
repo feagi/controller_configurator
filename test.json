@@ -23,7 +23,7 @@
 		"output": {
 			"motor": {
 				"0": {
-					"custom_name": "",
+					"custom_name": "waffles",
 					"disabled": false,
 					"feagi_index": 0,
 					"max_power": 0,

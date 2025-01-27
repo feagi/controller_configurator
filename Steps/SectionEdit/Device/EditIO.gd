@@ -32,6 +32,7 @@ func add_device(device_definition: FEAGIDevice) -> void:
 	category.setup(is_input, device_definition.device_key, device_definition.description)
 	_device_category_holder.add_child(category)
 	category.spawn_device(device_definition)
+	category.request_adding_device.connect(func(device_name: StringName, is_input_device: bool): request_adding_device.emit(device_name, is_input_device))
 
 ## Exports dictionary for configurator as {"input/output" : { "device_category: ... } }
 func export_as_FEAGI_configurator_JSON() -> Dictionary:

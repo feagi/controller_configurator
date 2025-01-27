@@ -9,6 +9,8 @@ var _is_input: bool
 var _box: VBoxContainer
 var _header: Label
 
+signal request_adding_device(device_name: StringName, is_input_device: bool)
+
 func setup(is_input: bool, title: StringName, description: StringName) -> void:
 	_box = $DeviceType
 	_header = $DeviceType/HBoxContainer/Label
@@ -19,8 +21,9 @@ func setup(is_input: bool, title: StringName, description: StringName) -> void:
 
 func spawn_device(device_definition: FEAGIDevice) -> void:
 	var device_UI: EditDevice = DEVICE_PREFAB.instantiate()
-	device_UI.setup_Device(device_definition)
 	_box.add_child(device_UI)
+	device_UI.setup_device(device_definition)
+	device_UI.tree_exited.connect(_device_has_removed)
 
 ## Exports JSON as {"Device Key" : {"str device index" : {device details}}}
 func export_as_FEAGI_configurator_JSON() -> Dictionary:
@@ -34,3 +37,15 @@ func export_as_FEAGI_configurator_JSON() -> Dictionary:
 		device_index += 1
 		output.merge(JSON_device_definition)
 	return output
+
+func _device_has_removed() -> void:
+	if len(_box.get_children()) == 1: # no more devices, remove category
+		queue_free()
+		return
+	for child in _box.get_children():
+		if child is not EditDevice:
+			continue
+		(child as EditDevice).refresh_device_ID_label()
+
+func _user_request_adding_device() -> void:
+	request_adding_device.emit(_header.text, _is_input)

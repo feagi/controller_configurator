@@ -27,4 +27,4 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Add Device Instance"
 
-[connection signal="pressed" from="DeviceType/HBoxContainer/Button" to="." method="spawn_device"]
+[connection signal="pressed" from="DeviceType/HBoxContainer/Button" to="." method="_user_request_adding_device"]

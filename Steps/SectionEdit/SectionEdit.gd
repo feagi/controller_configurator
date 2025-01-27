@@ -32,6 +32,9 @@ func reset_view() -> void:
 
 func _add_device(device_name: StringName, is_input_device: bool) -> void:
 	var device: FEAGIDevice = _template_ref.spawn_device_from_template(device_name, is_input_device)
+	if !device:
+		push_error("Invalid device %s!" % device_name)
+		return
 	if is_input_device:
 		_inputs.add_device(device)
 	else:
@@ -39,6 +42,7 @@ func _add_device(device_name: StringName, is_input_device: bool) -> void:
 
 func _user_pressed_back() -> void:
 	user_requests_going_back.emit()
+
 
 func _user_requests_saving_config() -> void:
 	var dictionary: Dictionary = { "capapabilities": { } }

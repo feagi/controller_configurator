@@ -8,7 +8,7 @@ var _is_input: bool
 
 var _header: Label
 
-func setup_Device(device_definition: FEAGIDevice) -> void:
+func setup_device(device_definition: FEAGIDevice) -> void:
 	_header = $MarginContainer/VBoxContainer/Header/Label
 	var holder: VBoxContainer = $MarginContainer/VBoxContainer
 	_device_key = device_definition.device_key
@@ -23,7 +23,7 @@ func refresh_device_ID_label() -> void:
 	_header.text = "Device ID: " + str(get_physical_ID())
 
 func get_physical_ID() -> int:
-	return get_index() + 1
+	return get_index() - 1
 
 func export() -> FEAGIDevice:
 	var output: FEAGIDevice = FEAGIDevice.new()

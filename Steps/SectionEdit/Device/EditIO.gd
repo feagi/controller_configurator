@@ -1,4 +1,4 @@
-extends Node
+extends VBoxContainer
 class_name EditIO
 ## Handles input / output panels
 

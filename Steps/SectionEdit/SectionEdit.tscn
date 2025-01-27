@@ -6,6 +6,7 @@
 [node name="SectionEdit" type="BoxContainer"]
 offset_right = 1280.0
 offset_bottom = 720.0
+size_flags_vertical = 3
 theme_override_constants/separation = 16
 script = ExtResource("1_mg7qj")
 
@@ -46,6 +47,8 @@ size_flags_vertical = 3
 theme_type_variation = &"Background_2"
 
 [node name="MarginContainer" type="MarginContainer" parent="Inputs/PanelContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Inputs/PanelContainer/MarginContainer"]
@@ -92,6 +95,7 @@ size_flags_vertical = 3
 theme_type_variation = &"Background_2"
 
 [node name="MarginContainer" type="MarginContainer" parent="Outputs/PanelContainer"]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Outputs/PanelContainer/MarginContainer"]

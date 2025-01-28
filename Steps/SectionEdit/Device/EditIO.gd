@@ -50,7 +50,7 @@ func reset() -> void:
 	for child in _device_category_holder.get_children():
 		if child is not EditDeviceCategory:
 			continue
-		child.queue_free() # Risky but should be fine since we are queueing free
+		child.queue_free() # Risky in a for loop but should be fine since we are queueing
 
 func _user_pressed_add_button() -> void:
 	if _add_device_dropdown.selected == -1:

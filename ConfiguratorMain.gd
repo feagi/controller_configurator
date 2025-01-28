@@ -35,6 +35,7 @@ func _import_file(UI: BaseConfigImporter, data: PackedByteArray, file_name: Stri
 	UI.load_input_data(data, _template_data, file_name)
 	UI.UI_import_fail.connect(_revert_to_start)
 	UI.UI_import_successful.connect(_display_robot_config)
+	_section_edit.reset_view()
 
 func _build_from_scratch() -> void:
 	_section_edit.visible = true

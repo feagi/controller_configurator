@@ -1,7 +1,7 @@
 extends BoxContainer
 class_name SectionStart
 
-const IMPORTERS_DIRECTORY: StringName = "res://Steps/Importers/"
+const IMPORTERS_DIRECTORY: StringName = "res://Steps/Importers/CustomImporters/"
 
 signal attempt_import(import_UI: BaseConfigImporter, imported_data: PackedByteArray, file_name: StringName)
 signal create_from_scratch()
@@ -14,8 +14,6 @@ func _ready() -> void:
 	_import_file_button = $ImportFrom/CenterContainer/VBoxContainer/Button
 	
 	var import_options_folders: PackedStringArray = DirAccess.get_directories_at(IMPORTERS_DIRECTORY)
-	var base_folder_index: int = import_options_folders.find("base")
-	import_options_folders.remove_at(base_folder_index)
 	
 	for import_options_folder in import_options_folders:
 		_import_methods_dropdown.add_item(import_options_folder)

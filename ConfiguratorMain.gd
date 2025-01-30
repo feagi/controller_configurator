@@ -19,6 +19,7 @@ func _ready() -> void:
 	_template_data.fill_template_cache_from_template_JSON()
 	_section_edit.setup(_template_data)
 	
+	
 
 func _revert_to_start():
 	if _section_config_importer:

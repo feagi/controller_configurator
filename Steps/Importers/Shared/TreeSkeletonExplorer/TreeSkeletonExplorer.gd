@@ -8,14 +8,6 @@ var _FEAGI_device_templates: Dictionary # Templates for spawning [FEAGIDevice]s
 
 ## Call to initialize this object
 func setup(JSON_device_mapper_path: StringName, FEAGI_device_templates: Dictionary, imported_possible_devices_tree: Dictionary) -> Error:
-	
-	clear()
-	
-	_JSON_device_mapper = _import_mapping_dictionary(JSON_device_mapper_path)
-	_FEAGI_device_templates = FEAGI_device_templates
-	
-	var root_node: TreeItem = create_item(null) 
-	var root_node_ok: Error = _check_and_populate_tree_node_UI(root_node, imported_possible_devices_tree)
 	"""
 	Expected Structure for imported_possible_devices_tree->
 	{
@@ -27,6 +19,13 @@ func setup(JSON_device_mapper_path: StringName, FEAGI_device_templates: Dictiona
 		"children": array with this dictionary structure recursively
 	}
 	"""
+	clear()
+	_JSON_device_mapper = _import_mapping_dictionary(JSON_device_mapper_path)
+	_FEAGI_device_templates = FEAGI_device_templates
+	
+	var root_node: TreeItem = create_item(null) 
+	var root_node_ok: Error = _check_and_populate_tree_node_UI(root_node, imported_possible_devices_tree)
+
 	
 	if !root_node_ok:
 		push_error("Root Node Invalid!")
@@ -39,14 +38,9 @@ func setup(JSON_device_mapper_path: StringName, FEAGI_device_templates: Dictiona
 	if "children" in imported_possible_devices_tree:
 		var children: Array = imported_possible_devices_tree["children"]
 		for child_data in children:
-			
-			
-			
 			_generate_node_generate_tree(child_data, root_node)
 	
 	return Error.OK
-	
-	#_import_tree_dictionary(imported_possible_devices_tree)
 
 
 ## Reads and verifies the mapping file for mapping types of devices from the config file import, to [FEAGIDevice] types

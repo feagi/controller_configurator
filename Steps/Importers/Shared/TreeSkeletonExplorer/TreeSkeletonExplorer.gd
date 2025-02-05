@@ -3,11 +3,10 @@ class_name TreeSkeletonExplorer
 
 signal possible_devices_list_requested(possible_devices: Array[FEAGIDevice])
 
-var _JSON_device_mapper: Dictionary # see _import_mapping_dictionary for expected structure
 var _robot_config_template_holder_ref: FEAGIRobotConfigurationTemplateHolder
 
 ## Call to initialize this object
-func setup(JSON_device_mapper_path: StringName, ref_to_robot_config_template_holder: FEAGIRobotConfigurationTemplateHolder, imported_possible_devices_root_tree_nodes: Array) -> Error:
+func setup(ref_to_robot_config_template_holder: FEAGIRobotConfigurationTemplateHolder, imported_possible_devices_root_tree_nodes: Array) -> Error:
 	"""
 	Expected Structure for imported_possible_devices_tree->
 	[
@@ -26,15 +25,13 @@ func setup(JSON_device_mapper_path: StringName, ref_to_robot_config_template_hol
 		push_error("No nodes to import!")
 		return Error.ERR_DOES_NOT_EXIST
 	
-		
 	
-	_JSON_device_mapper = _import_mapping_dictionary(JSON_device_mapper_path)
 	_robot_config_template_holder_ref = ref_to_robot_config_template_holder
 	
 	var imported_possible_devices_tree: Dictionary
 	if len(imported_possible_devices_root_tree_nodes) == 1:
 		imported_possible_devices_tree = imported_possible_devices_root_tree_nodes[0]
-	else:
+	else: # we want 1 root node
 		imported_possible_devices_tree = {
 			"name": "root",
 			"type": "body",
@@ -62,36 +59,6 @@ func setup(JSON_device_mapper_path: StringName, ref_to_robot_config_template_hol
 	return Error.OK
 
 
-## Reads and verifies the mapping file for mapping types of devices from the config file import, to [FEAGIDevice] types
-func _import_mapping_dictionary(JSON_device_mapper_path: StringName) -> Dictionary:
-	"""
-	Expected Structure ->
-	{
-		str type (matching string from tree dictionary 'type') : 
-		[ # arr of all possible matching types
-			{
-				"type" : str type name as defined by FEAGI template JSON,
-				"properties": {
-					str property name from tree : str property name from FEAGI template
-			},
-		]
-	}
-	"""
-
-	if !FileAccess.file_exists(JSON_device_mapper_path):
-		push_error("Unable to find device mapper JSON from given path!")
-		return {}
-	var file_text: String = FileAccess.get_file_as_string(JSON_device_mapper_path)
-	if file_text == "":
-		push_error("Unable to open device mapper JSON from given path!")
-		return {}
-	var json: Variant = JSON.parse_string(file_text)
-	if json is not Dictionary:
-		push_error("Unable to open device mapper JSON as a dictionary!")
-		return {}
-	
-	return json as Dictionary
-
 
 ## Returns a tree item if all inputs are valid. Otherwise returns null
 func _generate_node_generate_tree(node_info: Dictionary, parent: TreeItem    , ) -> TreeItem:
@@ -101,6 +68,7 @@ func _generate_node_generate_tree(node_info: Dictionary, parent: TreeItem    , )
 	var node_ok: Error = _check_and_populate_tree_node_UI(new_node, node_info)
 	if node_ok != Error.OK:
 		push_error("Failed to load node properties for the UI, skipping this node and its branch!")
+		parent.remove_child(new_node)
 		return null
 	node_ok = _generate_metadata_of_node(new_node, node_info)
 	if node_ok != Error.OK:
@@ -152,31 +120,17 @@ func _generate_metadata_of_node(tree_node: TreeItem, node_details: Dictionary) -
 
 ## Assuming node details dict is valid, returns an array of all possible [FEAGIDevice]s this node could be
 func _init_possible_feagi_devices_for_node(node_details: Dictionary) -> Array[FEAGIDevice]:
-	# Where 'node_details' is the generate details about this node
+	# Where 'node_details' is the generated details about this node
 	
-	if !_JSON_device_mapper.has("output"):
-		push_error("Missing output device tempaltes!")
+	if node_details.get("type") not in ["input", "output"]:
+		push_error("non input/output node type cannot have FEAGI Devices!")
 		return []
 	
-	var device_mapper_IO: Dictionary = _JSON_device_mapper["output"]
 	var is_input: bool = node_details["type"] == "input"
-	
-	if is_input:
-		if !_JSON_device_mapper.has("input"):
-			push_error("Missing input device tempaltes!")
-			return []
-		device_mapper_IO = _JSON_device_mapper["input"]
-		
-		
 	var node_subtype: StringName = node_details["subtype"]
 	var node_properties: Dictionary = node_details["properties"].duplicate(true)
 	
-	if node_subtype not in device_mapper_IO.keys():
-		push_error("Unable to match any Feagi Devices for device type %s! Are the device mapper JSONs up to date?" % node_subtype)
-		return []
-	
 	var possible_matching_types_mappings: Array[Dictionary] = []
-	possible_matching_types_mappings.assign(device_mapper_IO["subtype"])
 	
 	var output: Array[FEAGIDevice] = []
 	
@@ -192,17 +146,9 @@ func _init_possible_feagi_devices_for_node(node_details: Dictionary) -> Array[FE
 		if "description" in node_details:
 			FEAGI_device.description = node_details["description"]
 		var node_details_map_to_FEAGI_device_properties: Dictionary = possible_matching_type_mapping["properties"] 
-		var new_parameters: Dictionary = _move_properties_to_from_old_keynames_to_new_mapped_keynames(node_details["parameters"], node_details_map_to_FEAGI_device_properties)
+		var new_parameters: Dictionary = node_details["parameters"]
 		FEAGI_device.overwrite_parameter_values(new_parameters)
 
 		output.append(FEAGI_device)
 	
-	return output
-
-
-func _move_properties_to_from_old_keynames_to_new_mapped_keynames(original_dict: Dictionary, mappings: Dictionary) -> Dictionary:
-	var output: Dictionary = {}
-	for original_key in original_dict:
-		if original_key in mappings.keys():
-			output[mappings[original_key]] = original_dict[original_key]
 	return output

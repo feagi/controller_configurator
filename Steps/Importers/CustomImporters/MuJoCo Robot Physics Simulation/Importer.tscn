@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b3vxx0h4lwuw3"]
+[gd_scene load_steps=3 format=3 uid="uid://b3vxx0h4lwuw3"]
 
 [ext_resource type="Script" uid="uid://dv6ef46jxxq2d" path="res://Steps/Importers/CustomImporters/MuJoCo Robot Physics Simulation/MuJoCoConfigurationImporter.gd" id="1_10ol6"]
+[ext_resource type="Script" uid="uid://gd85jbae2rae" path="res://Steps/Importers/Shared/TreeSkeletonExplorer/TreeSkeletonExplorer.gd" id="2_3okra"]
 
 [node name="Importer" type="BoxContainer"]
 offset_right = 900.0
@@ -59,6 +60,8 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("2_3okra")
+metadata/_edit_group_ = true
 
 [node name="RelevantSetting" type="VBoxContainer" parent="Success/HBoxContainer"]
 layout_mode = 2

@@ -4,30 +4,49 @@ class_name TreeSkeletonExplorer
 signal possible_devices_list_requested(possible_devices: Array[FEAGIDevice])
 
 var _JSON_device_mapper: Dictionary # see _import_mapping_dictionary for expected structure
-var _FEAGI_device_templates: Dictionary # Templates for spawning [FEAGIDevice]s
+var _robot_config_template_holder_ref: FEAGIRobotConfigurationTemplateHolder
 
 ## Call to initialize this object
-func setup(JSON_device_mapper_path: StringName, FEAGI_device_templates: Dictionary, imported_possible_devices_tree: Dictionary) -> Error:
+func setup(JSON_device_mapper_path: StringName, ref_to_robot_config_template_holder: FEAGIRobotConfigurationTemplateHolder, imported_possible_devices_root_tree_nodes: Array) -> Error:
 	"""
 	Expected Structure for imported_possible_devices_tree->
-	{
-		"name": str name of the node,
-		"type": str value with options "body", "input", or "output",
-		"subtype": str value that exists if type is input or output. defines the type of device
-		"properties": dictionary that exists if type is input or output, string keys with the data property with the value being the property
-		"description": optional str description of the node. may not exist or be blank,
-		"children": array with this dictionary structure recursively
-	}
+	[
+		{
+			"name": str name of the node,
+			"type": str value with options "body", "input", or "output",
+			"subtype": str value that exists if type is input or output. defines the type of device
+			"properties": dictionary that exists if type is input or output, string keys with the data property with the value being the property
+			"description": optional str description of the node. may not exist or be blank,
+			"children": array with this dictionary structure recursively
+		}
+	]
 	"""
 	clear()
+	if len(imported_possible_devices_root_tree_nodes) == 0:
+		push_error("No nodes to import!")
+		return Error.ERR_DOES_NOT_EXIST
+	
+		
+	
 	_JSON_device_mapper = _import_mapping_dictionary(JSON_device_mapper_path)
-	_FEAGI_device_templates = FEAGI_device_templates
+	_robot_config_template_holder_ref = ref_to_robot_config_template_holder
+	
+	var imported_possible_devices_tree: Dictionary
+	if len(imported_possible_devices_root_tree_nodes) == 1:
+		imported_possible_devices_tree = imported_possible_devices_root_tree_nodes[0]
+	else:
+		imported_possible_devices_tree = {
+			"name": "root",
+			"type": "body",
+			"description": "root node",
+			"children": imported_possible_devices_root_tree_nodes
+		}
 	
 	var root_node: TreeItem = create_item(null) 
 	var root_node_ok: Error = _check_and_populate_tree_node_UI(root_node, imported_possible_devices_tree)
 
 	
-	if !root_node_ok:
+	if root_node_ok != Error.OK:
 		push_error("Root Node Invalid!")
 		return Error.ERR_INVALID_DATA
 	if imported_possible_devices_tree["type"] != "body": # NOTE: Root node must always be a body
@@ -80,11 +99,11 @@ func _generate_node_generate_tree(node_info: Dictionary, parent: TreeItem    , )
 	
 	var new_node: TreeItem = create_item(parent)
 	var node_ok: Error = _check_and_populate_tree_node_UI(new_node, node_info)
-	if !node_ok:
+	if node_ok != Error.OK:
 		push_error("Failed to load node properties for the UI, skipping this node and its branch!")
 		return null
 	node_ok = _generate_metadata_of_node(new_node, node_info)
-	if !node_ok:
+	if node_ok != Error.OK:
 		push_error("Failed to FEAGI device details for node '%s'! No devices will be suggested!" % node_info["name"])
 		# no need to stop
 
@@ -135,13 +154,19 @@ func _generate_metadata_of_node(tree_node: TreeItem, node_details: Dictionary) -
 func _init_possible_feagi_devices_for_node(node_details: Dictionary) -> Array[FEAGIDevice]:
 	# Where 'node_details' is the generate details about this node
 	
+	if !_JSON_device_mapper.has("output"):
+		push_error("Missing output device tempaltes!")
+		return []
+	
 	var device_mapper_IO: Dictionary = _JSON_device_mapper["output"]
-	var FEAGI_device_template_JSON_IO: Dictionary = _FEAGI_device_templates["output"]
 	var is_input: bool = node_details["type"] == "input"
 	
 	if is_input:
-		FEAGI_device_template_JSON_IO = _FEAGI_device_templates["input"]
+		if !_JSON_device_mapper.has("input"):
+			push_error("Missing input device tempaltes!")
+			return []
 		device_mapper_IO = _JSON_device_mapper["input"]
+		
 		
 	var node_subtype: StringName = node_details["subtype"]
 	var node_properties: Dictionary = node_details["properties"].duplicate(true)
@@ -157,12 +182,9 @@ func _init_possible_feagi_devices_for_node(node_details: Dictionary) -> Array[FE
 	
 	for possible_matching_type_mapping in possible_matching_types_mappings:
 		var matched_FEAGI_type: StringName = possible_matching_type_mapping["type"]
-		if matched_FEAGI_type not in FEAGI_device_template_JSON_IO.keys():
-			push_error("Unable to match any %s to any FEAGI device in the FEAGI template JSON!" % matched_FEAGI_type)
-			continue
-		var FEAGI_device_template: Dictionary = FEAGI_device_template_JSON_IO[matched_FEAGI_type]
-		var FEAGI_device: FEAGIDevice = FEAGIDevice.create_from_template(FEAGI_device_template, matched_FEAGI_type, is_input) # create the blank template
+		var FEAGI_device: FEAGIDevice = _robot_config_template_holder_ref.spawn_device_from_template(matched_FEAGI_type, is_input)
 		if !FEAGI_device: # if not valid
+			push_error("Unable to spawn FEAGI Device of type '%s'!" % matched_FEAGI_type)
 			continue
 
 		## We have the device with default values, lets fill in what we have

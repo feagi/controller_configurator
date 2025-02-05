@@ -132,11 +132,32 @@ func _generate_metadata_of_node(tree_node: TreeItem, node_details: Dictionary) -
 
 ## If details are valid, returns given [TreeItem] with the UI elements updated. Otherwise return null
 func _check_and_populate_tree_node_UI(tree_node: TreeItem, details: Dictionary) -> Error:
+	
+	const DEFAULT_COLOR: Color = Color.GRAY
+	const INPUT_COLOR: Color = Color.WEB_GREEN
+	const OUTPUT_COLOR: Color = Color.DARK_CYAN
+	
 	tree_node.set_text(0, details["name"])
 	if "description" in details:
 		tree_node.set_tooltip_text(0, str(details["description"]))
 	
+	# get icon color skew
+	var color_skew: Color = DEFAULT_COLOR
+	match details["type"]:
+		"input":
+			color_skew = INPUT_COLOR
+		"output":
+			color_skew = OUTPUT_COLOR
+		"_":
+			pass
+
 	tree_node.set_icon(0, _get_icon_for_node(details))
+	tree_node.set_icon_max_width(0, 24)
+	tree_node.set_icon_modulate(0, color_skew)
+	
+	
+	
+	
 	return Error.OK
 
 
@@ -172,19 +193,9 @@ func _init_FEAGI_device_for_node(node_details: Dictionary) -> FEAGIDevice:
 
 func _get_icon_for_node(node_info: Dictionary) -> Texture2D:
 	
-	const DEFAULT_COLOR: Color = Color.GRAY
-	const INPUT_COLOR: Color = Color.WEB_GREEN
-	const OUTPUT_COLOR: Color = Color.DARK_CYAN
 	
 	if node_info["type"] == "body":
 		return load(GENERIC_ICON_PATH)
-	
-	# get color skew
-	var color_skew: Color = DEFAULT_COLOR
-	if node_info["type"] == "input":
-		color_skew = INPUT_COLOR
-	else:
-		color_skew = OUTPUT_COLOR
 	
 	# load icon
 	var loading_path: StringName = GENERIC_ICON_PATH
@@ -193,18 +204,4 @@ func _get_icon_for_node(node_info: Dictionary) -> Texture2D:
 		if !FileAccess.file_exists(loading_path):
 			loading_path = GENERIC_ICON_PATH # fallback to generic icon if no specific icon found
 	
-	#var image: CompressedTexture2D = load(loading_path)
-	var icon: IconTexture = IconTexture.new()
-	icon.load(loading_path)
-	icon.overriding_modulation = color_skew
-	return icon
-
-
-
-# This is one heck of a hack. I would almost be proud if it wasnt kinda cursed
-class IconTexture:
-	extends CompressedTexture2D
-	var overriding_modulation: Color = Color.WHITE
-	func _draw(to_canvas_item: RID, pos: Vector2, modulate: Color, transpose: bool) -> void:
-		modulate = overriding_modulation
-		
+	return load(loading_path)

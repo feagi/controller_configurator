@@ -130,7 +130,7 @@ func _generate_metadata_of_node(tree_node: TreeItem, node_details: Dictionary) -
 	return to_return
 
 
-## If details are valid, returns given [TreeItem] with the UI elements updated. Otherwise return null
+## Applies UI settings to treenodes
 func _check_and_populate_tree_node_UI(tree_node: TreeItem, details: Dictionary) -> Error:
 	
 	const DEFAULT_COLOR: Color = Color.GRAY
@@ -154,8 +154,6 @@ func _check_and_populate_tree_node_UI(tree_node: TreeItem, details: Dictionary) 
 	tree_node.set_icon(0, _get_icon_for_node(details))
 	tree_node.set_icon_max_width(0, 24)
 	tree_node.set_icon_modulate(0, color_skew)
-	
-	
 	
 	
 	return Error.OK
@@ -192,11 +190,9 @@ func _init_FEAGI_device_for_node(node_details: Dictionary) -> FEAGIDevice:
 	
 
 func _get_icon_for_node(node_info: Dictionary) -> Texture2D:
-	
-	
 	if node_info["type"] == "body":
 		return load(GENERIC_ICON_PATH)
-	
+		
 	# load icon
 	var loading_path: StringName = GENERIC_ICON_PATH
 	if node_info["type"] != "body":

@@ -70,10 +70,12 @@ func _generate_node_generate_tree(node_info: Dictionary, parent: TreeItem    , )
 		push_error("Failed to load node properties for the UI, skipping this node and its branch!")
 		parent.remove_child(new_node)
 		return null
-	node_ok = _generate_metadata_of_node(new_node, node_info)
-	if node_ok != Error.OK:
-		push_error("Failed to FEAGI device details for node '%s'! No devices will be suggested!" % node_info["name"])
-		# no need to stop
+	
+	if node_info.get("type") in ["input", "output"]:
+		node_ok = _generate_metadata_of_node(new_node, node_info)
+		if node_ok != Error.OK:
+			push_error("Failed to FEAGI device details for node '%s'! No devices will be suggested!" % node_info["name"])
+			# no need to stop
 
 	if "children" in node_info:
 		var children: Array = node_info["children"]

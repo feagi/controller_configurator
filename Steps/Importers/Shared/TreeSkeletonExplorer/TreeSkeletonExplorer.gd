@@ -1,6 +1,9 @@
 extends Tree
 class_name TreeSkeletonExplorer
 
+const ICONS_PATH = "res://Steps/Importers/Shared/TreeSkeletonExplorer/icons/"
+const GENERIC_ICON_PATH = "res://Steps/Importers/Shared/TreeSkeletonExplorer/icons/generic.png"
+
 signal possible_devices_list_requested(possible_devices: Array[FEAGIDevice])
 
 var _robot_config_template_holder_ref: FEAGIRobotConfigurationTemplateHolder
@@ -129,17 +132,12 @@ func _generate_metadata_of_node(tree_node: TreeItem, node_details: Dictionary) -
 
 ## If details are valid, returns given [TreeItem] with the UI elements updated. Otherwise return null
 func _check_and_populate_tree_node_UI(tree_node: TreeItem, details: Dictionary) -> Error:
-
-	
 	tree_node.set_text(0, details["name"])
 	if "description" in details:
 		tree_node.set_tooltip_text(0, str(details["description"]))
 	
-	#if "type" in ["input", "output"]:
-	# TODO additional UI, colums? icons? buttons?
+	tree_node.set_icon(0, _get_icon_for_node(details))
 	return Error.OK
-
-
 
 
 ## Assuming node details dict is valid, returns the default [FEAGIDevice] for this node. Otherwise returns null
@@ -171,3 +169,42 @@ func _init_FEAGI_device_for_node(node_details: Dictionary) -> FEAGIDevice:
 	
 	return FEAGI_device
 	
+
+func _get_icon_for_node(node_info: Dictionary) -> Texture2D:
+	
+	const DEFAULT_COLOR: Color = Color.GRAY
+	const INPUT_COLOR: Color = Color.WEB_GREEN
+	const OUTPUT_COLOR: Color = Color.DARK_CYAN
+	
+	if node_info["type"] == "body":
+		return load(GENERIC_ICON_PATH)
+	
+	# get color skew
+	var color_skew: Color = DEFAULT_COLOR
+	if node_info["type"] == "input":
+		color_skew = INPUT_COLOR
+	else:
+		color_skew = OUTPUT_COLOR
+	
+	# load icon
+	var loading_path: StringName = GENERIC_ICON_PATH
+	if node_info["type"] != "body":
+		loading_path = ICONS_PATH + node_info["type"] + "/" + node_info["feagi device type"] + ".png"
+		if !FileAccess.file_exists(loading_path):
+			loading_path = GENERIC_ICON_PATH # fallback to generic icon if no specific icon found
+	
+	#var image: CompressedTexture2D = load(loading_path)
+	var icon: IconTexture = IconTexture.new()
+	icon.load(loading_path)
+	icon.overriding_modulation = color_skew
+	return icon
+
+
+
+# This is one heck of a hack. I would almost be proud if it wasnt kinda cursed
+class IconTexture:
+	extends CompressedTexture2D
+	var overriding_modulation: Color = Color.WHITE
+	func _draw(to_canvas_item: RID, pos: Vector2, modulate: Color, transpose: bool) -> void:
+		modulate = overriding_modulation
+		

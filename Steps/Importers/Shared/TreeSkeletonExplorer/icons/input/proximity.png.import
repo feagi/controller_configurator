@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://iungigfh2y47"
-path="res://.godot/imported/servo.png-0da72b4b18dc022e83ce31ad04697b02.ctex"
+uid="uid://boavyu43x5igu"
+path="res://.godot/imported/proximity.png-8bb8c50d341e2c7f15ad84de088f81ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Steps/Importers/Shared/TreeSkeletonExplorer/icons/outputs/servo.png"
-dest_files=["res://.godot/imported/servo.png-0da72b4b18dc022e83ce31ad04697b02.ctex"]
+source_file="res://Steps/Importers/Shared/TreeSkeletonExplorer/icons/input/proximity.png"
+dest_files=["res://.godot/imported/proximity.png-8bb8c50d341e2c7f15ad84de088f81ff.ctex"]
 
 [params]
 

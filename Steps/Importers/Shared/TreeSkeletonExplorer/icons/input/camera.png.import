@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pff53sa1efnr"
-path="res://.godot/imported/pressure.png-c94afd3b6e2d1c199e51047e975b46c4.ctex"
+uid="uid://bk1r1xm6asrqp"
+path="res://.godot/imported/camera.png-086f8ecd548873c560b0ec2eb6bca605.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Steps/Importers/Shared/TreeSkeletonExplorer/icons/inputs/pressure.png"
-dest_files=["res://.godot/imported/pressure.png-c94afd3b6e2d1c199e51047e975b46c4.ctex"]
+source_file="res://Steps/Importers/Shared/TreeSkeletonExplorer/icons/input/camera.png"
+dest_files=["res://.godot/imported/camera.png-086f8ecd548873c560b0ec2eb6bca605.ctex"]
 
 [params]
 

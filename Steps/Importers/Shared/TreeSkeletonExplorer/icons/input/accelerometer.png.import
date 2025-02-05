@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfpdb06ipb0p7"
-path="res://.godot/imported/lidar.png-ba938f72dd0a44f5cb2855f781a19b67.ctex"
+uid="uid://d2p2hgqmscrx8"
+path="res://.godot/imported/accelerometer.png-c5427c662344e8081efb4bc4fb12561e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Steps/Importers/Shared/TreeSkeletonExplorer/icons/inputs/lidar.png"
-dest_files=["res://.godot/imported/lidar.png-ba938f72dd0a44f5cb2855f781a19b67.ctex"]
+source_file="res://Steps/Importers/Shared/TreeSkeletonExplorer/icons/input/accelerometer.png"
+dest_files=["res://.godot/imported/accelerometer.png-c5427c662344e8081efb4bc4fb12561e.ctex"]
 
 [params]
 

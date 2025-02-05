@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boavyu43x5igu"
-path="res://.godot/imported/proximity.png-25b9f169b0f4e3d9d78c6e185f6a3311.ctex"
+uid="uid://de1tx84iwiksg"
+path="res://.godot/imported/motor.png-d36c34a13b6dc3da58104e498d67efb3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Steps/Importers/Shared/TreeSkeletonExplorer/icons/inputs/proximity.png"
-dest_files=["res://.godot/imported/proximity.png-25b9f169b0f4e3d9d78c6e185f6a3311.ctex"]
+source_file="res://Steps/Importers/Shared/TreeSkeletonExplorer/icons/output/motor.png"
+dest_files=["res://.godot/imported/motor.png-d36c34a13b6dc3da58104e498d67efb3.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bk1r1xm6asrqp"
-path="res://.godot/imported/camera.png-050c88c060495967740c3607b614d116.ctex"
+uid="uid://cs1atwsc14725"
+path="res://.godot/imported/force.png-d49525d06e3dc8d1109fa088d44616db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Steps/Importers/Shared/TreeSkeletonExplorer/icons/inputs/camera.png"
-dest_files=["res://.godot/imported/camera.png-050c88c060495967740c3607b614d116.ctex"]
+source_file="res://Steps/Importers/Shared/TreeSkeletonExplorer/icons/input/force.png"
+dest_files=["res://.godot/imported/force.png-d49525d06e3dc8d1109fa088d44616db.ctex"]
 
 [params]
 

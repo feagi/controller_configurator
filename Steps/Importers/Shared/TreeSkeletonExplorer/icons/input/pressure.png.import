@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2p2hgqmscrx8"
-path="res://.godot/imported/accelerometer.png-7dc78315c3aceda418b8bef5cba63b6c.ctex"
+uid="uid://pff53sa1efnr"
+path="res://.godot/imported/pressure.png-ee4d41e581f025ed4414323e966cc6c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Steps/Importers/Shared/TreeSkeletonExplorer/icons/inputs/accelerometer.png"
-dest_files=["res://.godot/imported/accelerometer.png-7dc78315c3aceda418b8bef5cba63b6c.ctex"]
+source_file="res://Steps/Importers/Shared/TreeSkeletonExplorer/icons/input/pressure.png"
+dest_files=["res://.godot/imported/pressure.png-ee4d41e581f025ed4414323e966cc6c5.ctex"]
 
 [params]
 

@@ -6,6 +6,7 @@ var _success: Control
 var _error_code: Label
 var _continue: Button
 var _tree: TreeSkeletonExplorer
+var _edit: EditFEAGIDeviceByIO
 
 func _ready() -> void:
 	_failure = $Failure
@@ -13,6 +14,7 @@ func _ready() -> void:
 	_error_code = $Failure/error
 	_continue = $Options/Continue
 	_tree = $Success/TreeAndDeviceEditor/Tree
+	_edit = $Success/TreeAndDeviceEditor/EditFeagiDeviceByIO
 
 ## This should return the expected file extension as a string
 func get_expected_file_extension() -> StringName:
@@ -28,6 +30,7 @@ func load_input_data(data: PackedByteArray, feagi_template: FEAGIRobotConfigurat
 	
 	
 	_tree.setup(feagi_template, recurse)
+	_edit.setup(feagi_template)
 	
 	
 	return

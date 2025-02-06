@@ -60,7 +60,7 @@ func setup(ref_to_robot_config_template_holder: FEAGIRobotConfigurationTemplateH
 		for child_data in children:
 			_generate_node_generate_tree(child_data, root_node)
 	
-	button_clicked.connect(_user_clicked_item)
+	item_selected.connect(_user_clicked_item)
 	return Error.OK
 
 
@@ -202,7 +202,11 @@ func _get_icon_for_node(node_info: Dictionary) -> Texture2D:
 	
 	return load(loading_path)
 
-func _user_clicked_item(item: TreeItem, _column: int, _id: int, _mouse_button_index: int) -> void:
+func _user_clicked_item() -> void:
+	var item: TreeItem = get_selected()
+	if !item:
+		return
+	
 	var metadata: Dictionary = item.get_metadata(0)
 	var device: FEAGIDevice = metadata.get("device")
 	if !device: #body or invalid buttons wont have a device

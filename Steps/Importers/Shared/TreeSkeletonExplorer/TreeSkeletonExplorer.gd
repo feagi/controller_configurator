@@ -4,7 +4,7 @@ class_name TreeSkeletonExplorer
 const ICONS_PATH = "res://Steps/Importers/Shared/TreeSkeletonExplorer/icons/"
 const GENERIC_ICON_PATH = "res://Steps/Importers/Shared/TreeSkeletonExplorer/icons/generic.png"
 
-signal possible_devices_list_requested(possible_devices: Array[FEAGIDevice])
+signal device_editing_requested(device: FEAGIDevice, from_node: TreeItem)
 
 var _robot_config_template_holder_ref: FEAGIRobotConfigurationTemplateHolder
 
@@ -60,8 +60,8 @@ func setup(ref_to_robot_config_template_holder: FEAGIRobotConfigurationTemplateH
 		for child_data in children:
 			_generate_node_generate_tree(child_data, root_node)
 	
+	button_clicked.connect(_user_clicked_item)
 	return Error.OK
-
 
 
 ## Returns a tree item if all inputs are valid. Otherwise returns null
@@ -82,7 +82,7 @@ func _generate_node_generate_tree(node_info: Dictionary, parent: TreeItem    , )
 		push_error("Failed to load node properties for the UI, skipping this node and its branch!")
 		parent.remove_child(new_node)
 		return null
-
+	
 	if "children" in node_info:
 		var children: Array = node_info["children"]
 		for child_data in children:
@@ -201,3 +201,10 @@ func _get_icon_for_node(node_info: Dictionary) -> Texture2D:
 			loading_path = GENERIC_ICON_PATH # fallback to generic icon if no specific icon found
 	
 	return load(loading_path)
+
+func _user_clicked_item(item: TreeItem, _column: int, _id: int, _mouse_button_index: int) -> void:
+	var metadata: Dictionary = item.get_metadata(0)
+	var device: FEAGIDevice = metadata.get("device")
+	if !device: #body or invalid buttons wont have a device
+		return
+	device_editing_requested.emit(device, item)

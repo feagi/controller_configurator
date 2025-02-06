@@ -1,6 +1,9 @@
 extends PanelContainer
 class_name EditDevice
 
+var is_input: bool:
+	get: return _is_input
+
 var _device_key: StringName
 var _device_label: StringName
 var _device_description: StringName

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b3vxx0h4lwuw3"]
 
 [ext_resource type="Script" uid="uid://dv6ef46jxxq2d" path="res://Steps/Importers/CustomImporters/MuJoCo Robot Physics Simulation/MuJoCoConfigurationImporter.gd" id="1_10ol6"]
-[ext_resource type="Script" uid="uid://gd85jbae2rae" path="res://Steps/Importers/Shared/TreeSkeletonExplorer/TreeSkeletonExplorer.gd" id="2_3okra"]
+[ext_resource type="PackedScene" uid="uid://cmw1f370orikv" path="res://Steps/Importers/Shared/TreeAndDeviceEditor/TreeAndDeviceEditor.tscn" id="2_3okra"]
 
 [node name="Importer" type="BoxContainer"]
 offset_right = 900.0
@@ -37,34 +37,14 @@ size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Success"]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 1
 theme_override_font_sizes/font_size = 20
 text = "Imported MuJoCo XML, please configure settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Success"]
+[node name="TreeAndDeviceEditor" parent="Success" instance=ExtResource("2_3okra")]
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Import" type="VBoxContainer" parent="Success/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="Success/HBoxContainer/Import"]
-layout_mode = 2
-text = "Configure import settings for nodes"
-horizontal_alignment = 1
-
-[node name="tree" type="Tree" parent="Success/HBoxContainer/Import"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource("2_3okra")
-
-[node name="RelevantSetting" type="VBoxContainer" parent="Success/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="Options" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -81,3 +61,5 @@ text = "Continue"
 
 [connection signal="pressed" from="Options/Back" to="." method="_pressed_back"]
 [connection signal="pressed" from="Options/Continue" to="." method="_forward_pressed"]
+
+[editable path="Success/TreeAndDeviceEditor"]

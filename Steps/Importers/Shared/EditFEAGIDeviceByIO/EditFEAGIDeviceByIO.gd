@@ -42,7 +42,7 @@ func show_FEAGI_device(feagi_device: FEAGIDevice, from_node: TreeItem) -> void:
 		if _from_node:
 			var metadata: Dictionary = _from_node.get_metadata(0)
 			if metadata.has("device"):
-				metadata["device"] = _current_device_UI.export() # write the new device details
+				metadata["device"] = export_device() # write the new device details
 		
 		_current_device_UI.queue_free()
 		_current_device_UI = null
@@ -62,6 +62,13 @@ func export_device() -> FEAGIDevice:
 	if !device:
 		push_error("Unable to export device!")
 	return device
+
+func save_current_device_from_UI() -> void:
+	if _current_device_UI:
+		if _from_node:
+			var metadata: Dictionary = _from_node.get_metadata(0)
+			if metadata.has("device"):
+				metadata["device"] = export_device() # write the new device details
 
 func _device_type_changed(id: int) -> void:
 	if !_current_device_UI:

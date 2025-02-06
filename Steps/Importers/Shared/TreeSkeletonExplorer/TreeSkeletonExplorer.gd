@@ -63,6 +63,18 @@ func setup(ref_to_robot_config_template_holder: FEAGIRobotConfigurationTemplateH
 	item_selected.connect(_user_clicked_item)
 	return Error.OK
 
+func generate_robot_config() -> FEAGIRobotConfiguration:
+	
+	var root_node: TreeItem = get_root()
+	if !root_node:
+		push_error("unable to generate inputs or outputs for Generated Robot Config!")
+		return  FEAGIRobotConfiguration.create_from_device_listings([], [])
+	
+	var inputs: Array[FEAGIDevice] = _recursive_return_FEAGI_devices([], true, root_node)
+	var outputs: Array[FEAGIDevice] = _recursive_return_FEAGI_devices([], false, root_node)
+	
+	return FEAGIRobotConfiguration.create_from_device_listings(inputs, outputs)
+
 
 ## Returns a tree item if all inputs are valid. Otherwise returns null
 func _generate_node_generate_tree(node_info: Dictionary, parent: TreeItem    , ) -> TreeItem:
@@ -212,3 +224,17 @@ func _user_clicked_item() -> void:
 	if !device: #body or invalid buttons wont have a device
 		return
 	device_editing_requested.emit(device, item)
+
+func _recursive_return_FEAGI_devices(arr: Array[FEAGIDevice], is_input: bool, current_node: TreeItem) -> Array[FEAGIDevice]:
+	if current_node.get_metadata(0):
+		var device: FEAGIDevice = current_node.get_metadata(0).get("device")
+		if device:
+			if is_input == device.is_input:
+				arr.append(device)
+	for child in current_node.get_children():
+		_recursive_return_FEAGI_devices(arr, is_input, child)
+	return arr
+
+
+
+	

@@ -47,6 +47,7 @@ text = " Load file... "
 
 [node name="Text" type="Button" parent="ImportFrom/CenterContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
+disabled = true
 text = "Load from Text..."
 
 [node name="TextImport" type="TextEdit" parent="ImportFrom/CenterContainer/VBoxContainer"]

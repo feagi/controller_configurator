@@ -112,6 +112,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 
+[node name="TextEdit" type="TextEdit" parent="Finalize"]
+custom_minimum_size = Vector2(0, 256)
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Output"
+editable = false
+
 [node name="HBoxContainer" type="HBoxContainer" parent="Finalize"]
 layout_mode = 2
 alignment = 2

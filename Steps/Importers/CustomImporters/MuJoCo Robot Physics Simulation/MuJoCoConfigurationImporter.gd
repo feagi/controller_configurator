@@ -29,10 +29,33 @@ func load_input_data(data: PackedByteArray, feagi_template: FEAGIRobotConfigurat
 		_error_import_state_UI(true)
 		return
 	
+	var endpoint_URL: StringName = "https://us-staging-composer.neurorobotics.studio/v1/public/regional/magic/configuration_parser"
+	
+	if OS.get_name() == "Web":
+		var JS_func_to_get_URL: StringName = """
+		function getURL() {
+			var url_string = window.location.href;
+			var url = new URL(url_string);
+			const searchParams = new URLSearchParams(url.search);
+			return searchParams.get("parser_url");
+		}
+		"""
+		var result: Variant = JavaScriptBridge.eval(JS_func_to_get_URL)
+		if !result:
+			push_error("Unable to get URL for endpoint, falling back to default...")
+		elif result is String or result is StringName:
+			endpoint_URL = result
+	else:
+		push_warning("Using fallback endpoint details as we dont have a way to get an up to date one")
+		
+	endpoint_URL += "?content_type=mujoco"
+
+	
+	
 	
 	_http_request = HTTPRequest.new()
 	add_child(_http_request)
-	_http_request.request_raw( "https://us-staging-composer.neurorobotics.studio/v1/public/regional/magic/configuration_parser?content_type=mujoco", ["Content-Type: application/xml"], HTTPClient.METHOD_POST, data) # cloud
+	_http_request.request_raw( endpoint_URL, ["Content-Type: application/xml"], HTTPClient.METHOD_POST, data) # cloud
 	var results: Array = await _http_request.request_completed
 	_http_request.queue_free()
 	_http_request = null

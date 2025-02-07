@@ -23,7 +23,7 @@ func _ready() -> void:
 		_import_methods_dropdown.add_item(import_options_folder)
 	_import_methods_dropdown.selected = -1
 	_text_import.text = ""
-	_text_import.editable = false
+	_text_import.visible = false
 	
 	
 	#TODO remove this segment once feature is implemented!
@@ -40,17 +40,23 @@ func _option_from_dropdown_selected(index: int) -> void:
 	var importer_scene_path: StringName = IMPORTERS_DIRECTORY + "/" + _import_methods_dropdown.get_item_text(index) + "/Importer.tscn"
 	if not ResourceLoader.exists(importer_scene_path):
 		_import_file_button.disabled = true
+		_import_text_button.disabled = true
 		_import_file_button.tooltip_text = "Unable to load UI elements for this option!"
+		_import_text_button.tooltip_text = "Unable to load UI elements for this option!"
 		push_error("Unable to find scene 'Importer.tscn' from '%s'! Not allowing loading of the UI!" % importer_scene_path)
 		return
 	var importer_check = load(str(importer_scene_path)).instantiate()
 	if importer_check is not BaseConfigImporter:
 		_import_file_button.disabled = true
+		_import_text_button.disabled = true
 		_import_file_button.tooltip_text = "Unable to load UI elements for this option!"
+		_import_text_button.tooltip_text = "Unable to load UI elements for this option!"
 		push_error("Unable to import scene at '%s' as a 'BaseConfigImporter'! Is the scene configured correctly?" % importer_scene_path)
 		return
-	_import_file_button.disabled = false
+	_import_file_button.disabled = OS.get_name() == "Web"
+	_import_text_button.disabled = false
 	_import_file_button.tooltip_text = "Load file to import..."
+	_import_text_button.tooltip_text = "Load text to import..."
 
 func _open_config_from_file_pressed() -> void:
 	var importer: BaseConfigImporter = _try_to_get_importer_from_dropdown_selection()

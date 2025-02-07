@@ -52,6 +52,7 @@ func show_FEAGI_device(feagi_device: FEAGIDevice, from_node: TreeItem) -> void:
 	_current_device_UI = FEAGI_DEVICE_UI_PREFAB.instantiate()
 	add_child(_current_device_UI)
 	_current_device_UI.setup_device(feagi_device)
+	_current_device_UI.hide_delete_button()
 
 
 func export_device() -> FEAGIDevice:

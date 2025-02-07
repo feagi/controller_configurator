@@ -4,6 +4,8 @@ class_name SectionEdit
 var _inputs: EditIO
 var _outputs: EditIO
 
+var _temp: TextEdit
+
 var _template_ref: FEAGIRobotConfigurationTemplateHolder
 
 signal user_requests_saving_configurator_as_JSON_dict(robot_config_as_JSON_dict: Dictionary)
@@ -15,6 +17,8 @@ func setup(template: FEAGIRobotConfigurationTemplateHolder) -> void:
 	_inputs.setup(template.get_possible_devices_from_template_cache(true))
 	_outputs.setup(template.get_possible_devices_from_template_cache(false))
 	_template_ref = template
+
+	_temp = $Finalize/TextEdit
 
 
 func load_config(defined_config: FEAGIRobotConfiguration) -> void:
@@ -49,3 +53,6 @@ func _user_requests_saving_config() -> void:
 	dictionary["capapabilities"].merge(_inputs.export_as_FEAGI_configurator_JSON())
 	dictionary["capapabilities"].merge(_outputs.export_as_FEAGI_configurator_JSON())
 	user_requests_saving_configurator_as_JSON_dict.emit(dictionary)
+
+	#TODO REMOVE
+	_temp.text = JSON.stringify(dictionary,  "\t")

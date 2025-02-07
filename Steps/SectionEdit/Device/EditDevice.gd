@@ -28,6 +28,9 @@ func refresh_device_ID_label() -> void:
 func get_physical_ID() -> int:
 	return get_index() - 1
 
+func hide_delete_button() -> void:
+	$MarginContainer/VBoxContainer/Header/Button.visible = false
+
 func export() -> FEAGIDevice:
 	var output: FEAGIDevice = FEAGIDevice.new()
 	output.device_key = _device_key

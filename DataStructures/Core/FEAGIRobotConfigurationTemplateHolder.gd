@@ -33,7 +33,13 @@ func spawn_device_from_template(device_name: StringName, is_input_device: bool) 
 	if device_name not in dict_ref:
 		return null
 	var template_ref: FEAGIDevice = dict_ref[device_name]
-	return template_ref.duplicate()
+	var new_device: FEAGIDevice = template_ref.duplicate(true)
+	
+	# fix reference BS
+	new_device.parameters = []
+	for parameter in template_ref.parameters:
+		new_device.parameters.append(parameter.duplicate(true))
+	return new_device
 
 func is_device_type_valid(device_type: StringName, is_input: bool) -> bool:
 	if is_input:

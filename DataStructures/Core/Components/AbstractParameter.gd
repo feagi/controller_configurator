@@ -23,19 +23,19 @@ static func auto_create_from_template_JSON_dict(JSON_dict: Dictionary) -> Abstra
 		return null
 	match(JSON_dict["type"]):
 		"string":
-			return StringParameter.create_from_template_JSON_dict(JSON_dict)
+			return StringParameter.create_from_template_JSON_dict(JSON_dict).duplicate(true)
 		"boolean":
-			return BooleanParameter.create_from_template_JSON_dict(JSON_dict)
+			return BooleanParameter.create_from_template_JSON_dict(JSON_dict).duplicate(true)
 		"integer":
-			return IntegerParameter.create_from_template_JSON_dict(JSON_dict)
+			return IntegerParameter.create_from_template_JSON_dict(JSON_dict).duplicate(true)
 		"float":
-			return FloatParameter.create_from_template_JSON_dict(JSON_dict)
+			return FloatParameter.create_from_template_JSON_dict(JSON_dict).duplicate(true)
 		"percentage":
-			return PercentageParameter.create_from_template_JSON_dict(JSON_dict)
+			return PercentageParameter.create_from_template_JSON_dict(JSON_dict).duplicate(true)
 		"vector3":
-			return Vector3Parameter.create_from_template_JSON_dict(JSON_dict)
+			return Vector3Parameter.create_from_template_JSON_dict(JSON_dict).duplicate(true)
 		"object":
-			return ObjectParameter.create_from_template_JSON_dict(JSON_dict)
+			return ObjectParameter.create_from_template_JSON_dict(JSON_dict).duplicate(true)
 	push_error("Unknown paramter type %s!" % JSON_dict["type"])
 	return null
 

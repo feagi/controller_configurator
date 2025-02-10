@@ -91,7 +91,7 @@ func update_UI_of_node_given_device(tree_node: TreeItem, device: FEAGIDevice) ->
 
 
 ## Returns a tree item if all inputs are valid. Otherwise returns null
-func _generate_node_generate_tree(node_info: Dictionary, parent: TreeItem    , ) -> TreeItem:
+func _generate_node_generate_tree(node_info: Dictionary, parent: TreeItem) -> TreeItem:
 	
 	var node_ok: Error = _confirm_node_details_has_required_keys(node_info)
 	if node_ok != Error.OK:
@@ -148,6 +148,10 @@ func _generate_metadata_of_node(tree_node: TreeItem, node_details: Dictionary) -
 		"type" : node_details["type"],
 		}
 	if node_details.get("type") in ["input", "output"]:
+		# add "custom_name" to properties
+		if node_details.has("properties") and node_details.has("name"):
+			node_details["properties"]["custom_name"] = node_details["name"]
+		
 		metadata["device"] = _init_FEAGI_device_for_node(node_details)
 		if metadata["device"] == null:
 			to_return = Error.ERR_INVALID_PARAMETER

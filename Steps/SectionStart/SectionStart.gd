@@ -34,6 +34,8 @@ func _ready() -> void:
 
 func reset_UI() -> void:
 	_import_methods_dropdown.selected = -1
+	_import_file_button.disabled = true
+	_import_text_button.disabled = true
 
 
 func _option_from_dropdown_selected(index: int) -> void:
@@ -81,6 +83,7 @@ func _open_config_from_file_pressed() -> void:
 
 		path = path.split("/")[-1] # get filename
 		attempt_import.emit(_try_to_get_importer_from_dropdown_selection(), bytes, path)
+		
 		return
 
 	# TODO HTML5 JS interactions

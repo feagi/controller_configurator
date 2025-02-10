@@ -4,7 +4,7 @@ class_name TreeSkeletonExplorer
 const ICONS_PATH = "res://Steps/Importers/Shared/TreeSkeletonExplorer/icons/"
 const GENERIC_ICON_PATH = "res://Steps/Importers/Shared/TreeSkeletonExplorer/icons/generic.png"
 
-signal device_editing_requested(device: FEAGIDevice, from_node: TreeItem)
+signal device_editing_requested(device: FEAGIDevice, from_node: TreeItem) # device may be null if no device is found for the given node
 
 var _robot_config_template_holder_ref: FEAGIRobotConfigurationTemplateHolder
 
@@ -219,10 +219,13 @@ func _user_clicked_item() -> void:
 	if !item:
 		return
 	
+	if !item.get_metadata(0):
+		# likely root node, as there is no metadata here.
+		device_editing_requested.emit(null, item)
+		return
+	
 	var metadata: Dictionary = item.get_metadata(0)
 	var device: FEAGIDevice = metadata.get("device")
-	if !device: #body or invalid buttons wont have a device
-		return
 	device_editing_requested.emit(device, item)
 
 func _recursive_return_FEAGI_devices(arr: Array[FEAGIDevice], is_input: bool, current_node: TreeItem) -> Array[FEAGIDevice]:

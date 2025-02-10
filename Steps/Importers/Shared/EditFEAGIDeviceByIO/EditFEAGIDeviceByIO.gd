@@ -28,6 +28,15 @@ func show_FEAGI_device(feagi_device: FEAGIDevice, from_node: TreeItem) -> void:
 	
 	_label.text = "Change Device Type: "
 	
+	if !feagi_device:
+		# No feagi device is given, clear window
+		if _current_device_UI:
+			_current_device_UI.queue_free()
+			_current_device_UI = null
+		_from_node = from_node
+		return
+		
+	
 	if feagi_device.is_input:
 		_outputs.visible = false
 		_inputs.visible = true

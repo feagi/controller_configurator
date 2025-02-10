@@ -203,16 +203,16 @@ func _init_FEAGI_device_for_node(node_details: Dictionary) -> FEAGIDevice:
 
 func _get_icon_for_node(node_info: Dictionary) -> Texture2D:
 	if node_info["type"] == "body":
-		return load(GENERIC_ICON_PATH)
+		return load(str(GENERIC_ICON_PATH))
 		
 	# load icon
-	var loading_path: StringName = GENERIC_ICON_PATH
+	var loading_path: String = GENERIC_ICON_PATH
 	if node_info["type"] != "body":
 		loading_path = ICONS_PATH + node_info["type"] + "/" + node_info["feagi device type"] + ".png"
 		if !FileAccess.file_exists(loading_path):
 			loading_path = GENERIC_ICON_PATH # fallback to generic icon if no specific icon found
 	
-	return load(loading_path)
+	return load(str(loading_path))
 
 func _user_clicked_item() -> void:
 	var item: TreeItem = get_selected()

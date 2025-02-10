@@ -42,7 +42,7 @@ func show_FEAGI_device(feagi_device: FEAGIDevice, from_node: TreeItem) -> void:
 		_inputs.visible = true
 		_inputs.selected = _robot_configuration_template.get_possible_devices_from_template_cache(true).find(feagi_device.device_key)
 	
-	if feagi_device.is_input:
+	else: # output
 		_inputs.visible = false
 		_outputs.visible = true
 		_outputs.selected = _robot_configuration_template.get_possible_devices_from_template_cache(false).find(feagi_device.device_key)

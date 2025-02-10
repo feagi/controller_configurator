@@ -52,6 +52,8 @@ func show_FEAGI_device(feagi_device: FEAGIDevice, from_node: TreeItem) -> void:
 			var metadata: Dictionary = _from_node.get_metadata(0)
 			if metadata.has("device"):
 				metadata["device"] = export_device() # write the new device details
+				var tree: TreeSkeletonExplorer = _from_node.get_tree()
+				tree.update_UI_of_node_given_device(_from_node, metadata["device"])
 		
 		_current_device_UI.queue_free()
 		_current_device_UI = null
@@ -79,6 +81,8 @@ func save_current_device_from_UI() -> void:
 			var metadata: Dictionary = _from_node.get_metadata(0)
 			if metadata.has("device"):
 				metadata["device"] = export_device() # write the new device details
+				var tree: TreeSkeletonExplorer = _from_node.get_tree()
+				tree.update_UI_of_node_given_device(_from_node, metadata["device"])
 
 func _device_type_changed(id: int) -> void:
 	if !_current_device_UI:

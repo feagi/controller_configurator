@@ -75,6 +75,20 @@ func generate_robot_config() -> FEAGIRobotConfiguration:
 	
 	return FEAGIRobotConfiguration.create_from_device_listings(inputs, outputs)
 
+## Using the set metadata of the node, updates UI elements to reflect
+func update_UI_of_node_given_device(tree_node: TreeItem, device: FEAGIDevice) -> void:
+	if !device:
+		return
+	if !tree_node:
+		return
+	var node_info: Dictionary
+	if device.is_input:
+		node_info["type"] = "input"
+	else:
+		node_info["type"] = "output"
+	node_info["feagi device type"] = device.device_key
+	_check_and_populate_tree_node_UI(tree_node, node_info)
+
 
 ## Returns a tree item if all inputs are valid. Otherwise returns null
 func _generate_node_generate_tree(node_info: Dictionary, parent: TreeItem    , ) -> TreeItem:
@@ -149,7 +163,8 @@ func _check_and_populate_tree_node_UI(tree_node: TreeItem, details: Dictionary) 
 	const INPUT_COLOR: Color = Color.WEB_GREEN
 	const OUTPUT_COLOR: Color = Color.DARK_CYAN
 	
-	tree_node.set_text(0, details["name"])
+	if "name" in details:
+		tree_node.set_text(0, details["name"])
 	if "description" in details:
 		tree_node.set_tooltip_text(0, str(details["description"]))
 	

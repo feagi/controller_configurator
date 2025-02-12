@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr7aun6cpi6bn"]
+
+[ext_resource type="Script" uid="uid://cg8x66uu7qq8k" path="res://Steps/Importers/CustomImporters/Tree Json/TreeJSONTestImport.gd" id="1_wlr0t"]
+[ext_resource type="PackedScene" uid="uid://cmw1f370orikv" path="res://Steps/Importers/Shared/TreeAndDeviceEditor/TreeAndDeviceEditor.tscn" id="2_bu3tl"]
+
+[node name="Importer" type="BoxContainer"]
+offset_right = 900.0
+offset_bottom = 445.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+vertical = true
+script = ExtResource("1_wlr0t")
+
+[node name="Failure" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Failure"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
+text = "Unable to load MuJoCo  XML!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="error" type="Label" parent="Failure"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "ERRORCODE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Success" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Success"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 20
+text = "Imported Tree JSON, please configure settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TreeAndDeviceEditor" parent="Success" instance=ExtResource("2_bu3tl")]
+layout_mode = 2
+
+[node name="Options" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 2
+
+[node name="Back" type="Button" parent="Options"]
+layout_mode = 2
+text = "Back"
+
+[node name="Continue" type="Button" parent="Options"]
+layout_mode = 2
+disabled = true
+text = "Continue"
+
+[connection signal="pressed" from="Options/Back" to="." method="_pressed_back"]
+[connection signal="pressed" from="Options/Continue" to="." method="_pressed_continue"]
+
+[editable path="Success/TreeAndDeviceEditor"]

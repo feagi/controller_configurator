@@ -119,8 +119,15 @@ func _generate_node_generate_tree(node_info: Dictionary, parent: TreeItem) -> Tr
 ## Checks if for a given node, all required keys exist
 func _confirm_node_details_has_required_keys(node_details: Dictionary) -> Error:
 	if "name" not in node_details:
-		push_error("Missing 'name' key for node!")
-		return Error.ERR_INVALID_PARAMETER
+		if "custom_name" in node_details:
+			if node_details["custom_name"] is not String and node_details["custom_name"] is not StringName:
+				push_error("Node is missing 'name' key and has a broken 'custom_name' key! Skipping!")
+				return Error.ERR_INVALID_PARAMETER
+			push_warning("Node is missing 'name' key but has 'custom_name' key by name of '%s'. Remapping. Note that this is an error in the source data structure and may lead to unexpected results!" % node_details["custom_name"])
+			node_details["name"] = node_details["custom_name"]
+		else:
+			push_error("Missing 'name' key for node!")
+			return Error.ERR_INVALID_PARAMETER
 	if "type" not in node_details:
 		push_error("Missing 'type' key for node!")
 		return Error.ERR_INVALID_PARAMETER

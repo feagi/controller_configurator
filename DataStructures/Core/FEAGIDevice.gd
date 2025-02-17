@@ -49,6 +49,13 @@ func _overwrite_sub_parameter(parameter_label: StringName, value: Variant, param
 					_overwrite_sub_parameter_values(value, parameter.value)
 					return true
 				else:
+					if parameter.value is Vector3 and value is Array:
+						if len(value) != 3:
+							push_error("Expected Array for Vector3 for parameter '%s' but got array of length %d!" % [parameter_label, len(value)])
+							return false
+						else:
+							parameter.value = Vector3(value[0], value[1], value[2])
+							return true
 					parameter.value = value
 					return true
 			else:

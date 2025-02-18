@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://chs76xdua3013"]
 
-[ext_resource type="Script" uid="uid://dl5gw3eord1my" path="res://Steps/Importers/CustomImporters/Existing FEAGI Robot Configuration/FeagiConfiguratorImporter.gd" id="1_yue23"]
+[ext_resource type="Script" uid="uid://dl5gw3eord1my" path="res://Steps/Importers/CustomImporters/Existing Capabilities/FeagiConfiguratorImporter.gd" id="1_yue23"]
 
 [node name="Importer" type="BoxContainer"]
 offset_right = 900.0

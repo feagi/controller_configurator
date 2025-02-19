@@ -55,4 +55,4 @@ func _user_requests_saving_config() -> void:
 	user_requests_saving_configurator_as_JSON_dict.emit(dictionary)
 
 	#TODO REMOVE
-	_temp.text = JSON.stringify(dictionary,  "\t")
+	_temp.text = JSON.stringify(dictionary,  "\t", false)

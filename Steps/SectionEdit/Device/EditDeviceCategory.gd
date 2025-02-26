@@ -36,7 +36,7 @@ func export_as_FEAGI_configurator_JSON() -> Dictionary:
 		var JSON_device_definition: Dictionary = device_definition.get_as_JSON_formatable_dict(device_index)
 		device_index += 1
 		output.merge(JSON_device_definition)
-	return output
+	return {name: output}
 
 func _device_has_removed() -> void:
 	if len(_box.get_children()) == 1: # no more devices, remove category

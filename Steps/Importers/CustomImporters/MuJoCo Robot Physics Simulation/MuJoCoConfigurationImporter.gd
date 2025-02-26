@@ -48,7 +48,7 @@ func load_input_data(data: PackedByteArray, feagi_template: FEAGIRobotConfigurat
 	else:
 		push_warning("Using fallback endpoint details as we dont have a way to get an up to date one")
 		
-	endpoint_URL += "?content_type=mujoco"
+	endpoint_URL += "?parser_type=mujoco"
 
 	
 	

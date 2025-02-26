@@ -29,7 +29,7 @@ func load_input_data(data: PackedByteArray, feagi_template: FEAGIRobotConfigurat
 		_error_import_state_UI(true)
 		return
 	
-	var endpoint_URL: StringName = "https://us-staging-composer.neurorobotics.studio/v1/public/regional/magic/configuration_parser"
+	var endpoint_URL: StringName = "https://us-east1-nrs-production.cloudfunctions.net/parser"
 	
 	if OS.get_name() == "Web":
 		var JS_func_to_get_URL: StringName = """

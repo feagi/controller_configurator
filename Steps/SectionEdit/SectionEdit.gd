@@ -49,9 +49,9 @@ func _user_pressed_back() -> void:
 
 
 func _user_requests_saving_config() -> void:
-	var dictionary: Dictionary = { "capapabilities": { } }
-	dictionary["capapabilities"].merge(_inputs.export_as_FEAGI_configurator_JSON())
-	dictionary["capapabilities"].merge(_outputs.export_as_FEAGI_configurator_JSON())
+	var dictionary: Dictionary = { "capabilities": { } }
+	dictionary["capabilities"].merge(_inputs.export_as_FEAGI_configurator_JSON())
+	dictionary["capabilities"].merge(_outputs.export_as_FEAGI_configurator_JSON())
 	user_requests_saving_configurator_as_JSON_dict.emit(dictionary)
 
 	#TODO REMOVE

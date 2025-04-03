@@ -1,0 +1,35 @@
+{
+	"capabilities": {
+		"input": {
+			"camera": {
+				"0": {
+					"custom_name": "asdasd",
+					"disabled": false,
+					"eccentricity_control": {
+						"X offset percentage": 22,
+						"Y offset percentage": 23
+					},
+					"feagi_index": 0,
+					"index": "00",
+					"mirror": false,
+					"modulation_control": {
+						"X offset percentage": 24,
+						"Y offset percentage": 25
+					},
+					"threshold_default": 51
+				}
+			}
+		},
+		"output": {
+			"motor": {
+				"0": {
+					"custom_name": "waffles",
+					"disabled": false,
+					"feagi_index": 0,
+					"max_power": 0,
+					"rolling_window_len": 0
+				}
+			}
+		}
+	}
+}

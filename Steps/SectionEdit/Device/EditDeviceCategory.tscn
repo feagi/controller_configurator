@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://dluodpdqeqxhh"]
+
+[ext_resource type="Script" uid="uid://0pm47tdv8p4m" path="res://Steps/SectionEdit/Device/EditDeviceCategory.gd" id="1_w15jm"]
+
+[node name="DeviceType" type="PanelContainer"]
+offset_right = 235.0
+offset_bottom = 50.0
+size_flags_horizontal = 3
+script = ExtResource("1_w15jm")
+
+[node name="DeviceType" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DeviceType"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="DeviceType/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "TEXT"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="DeviceType/HBoxContainer"]
+layout_mode = 2
+text = "Add Device Instance"
+
+[connection signal="pressed" from="DeviceType/HBoxContainer/Button" to="." method="_user_request_adding_device"]

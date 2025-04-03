@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://lqsiulg06gl2"]
+
+[ext_resource type="Script" uid="uid://co5xl5adv5r0r" path="res://ConfiguratorMain.gd" id="1_lri3c"]
+[ext_resource type="PackedScene" uid="uid://dqr3j76ykm3t6" path="res://Steps/SectionStart/SectionStart.tscn" id="2_fj0xn"]
+[ext_resource type="PackedScene" uid="uid://kdbkx6ie3i17" path="res://Steps/SectionEdit/SectionEdit.tscn" id="3_xqg6n"]
+
+[node name="ConfiguratorMain" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_lri3c")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="BoxContainer" type="BoxContainer" parent="MarginContainer"]
+layout_mode = 2
+vertical = true
+
+[node name="Header" type="MarginContainer" parent="MarginContainer/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Label" type="Label" parent="MarginContainer/BoxContainer/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "FEAGI Robot Configuration Generator"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="StepsHolder" type="BoxContainer" parent="MarginContainer/BoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+vertical = true
+
+[node name="SectionStart" parent="MarginContainer/BoxContainer/PanelContainer/MarginContainer/StepsHolder" instance=ExtResource("2_fj0xn")]
+layout_mode = 2
+
+[node name="SectionEdit" parent="MarginContainer/BoxContainer/PanelContainer/MarginContainer/StepsHolder" instance=ExtResource("3_xqg6n")]
+visible = false
+layout_mode = 2
+
+[connection signal="attempt_import" from="MarginContainer/BoxContainer/PanelContainer/MarginContainer/StepsHolder/SectionStart" to="." method="_import_file"]
+[connection signal="create_from_scratch" from="MarginContainer/BoxContainer/PanelContainer/MarginContainer/StepsHolder/SectionStart" to="." method="_build_from_scratch"]
+[connection signal="user_requests_going_back" from="MarginContainer/BoxContainer/PanelContainer/MarginContainer/StepsHolder/SectionEdit" to="." method="_revert_to_start"]

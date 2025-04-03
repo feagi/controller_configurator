@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://kxbquwa60b1m"]
+
+[ext_resource type="Script" uid="uid://dr6gdlq186usf" path="res://Steps/SectionEdit/Device/Parameters/EditObjectParameter.gd" id="1_d2erh"]
+
+[node name="Object" type="HBoxContainer"]
+theme_override_constants/separation = 8
+script = ExtResource("1_d2erh")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+mouse_filter = 1
+text = "NAME: "
+vertical_alignment = 1
+
+[node name="Holder" type="VBoxContainer" parent="."]
+layout_mode = 2

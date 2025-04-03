@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnaua2bgwsl26"]
+
+[ext_resource type="Script" uid="uid://bh6hsscx8vhs" path="res://Steps/SectionEdit/Device/EditDevice.gd" id="1_qmp3c"]
+
+[node name="EditDevice" type="PanelContainer"]
+size_flags_horizontal = 3
+script = ExtResource("1_qmp3c")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "device name"
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/Header"]
+layout_mode = 2
+text = "Delete this device..."
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Header/Button" to="." method="queue_free"]

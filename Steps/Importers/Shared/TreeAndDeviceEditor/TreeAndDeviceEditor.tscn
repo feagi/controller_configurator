@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmw1f370orikv"]
+
+[ext_resource type="Script" uid="uid://gd85jbae2rae" path="res://Steps/Importers/Shared/TreeSkeletonExplorer/TreeSkeletonExplorer.gd" id="2_rp863"]
+[ext_resource type="PackedScene" uid="uid://b0xls5b5fkaso" path="res://Steps/Importers/Shared/EditFEAGIDeviceByIO/EditFEAGIDeviceByIO.tscn" id="3_v8xyu"]
+
+[node name="TreeAndDeviceEditor" type="HBoxContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Tree" type="Tree" parent="."]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_rp863")
+
+[node name="EditFeagiDeviceByIO" parent="." instance=ExtResource("3_v8xyu")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="device_editing_requested" from="Tree" to="EditFeagiDeviceByIO" method="show_FEAGI_device"]

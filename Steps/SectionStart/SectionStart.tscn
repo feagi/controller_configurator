@@ -1,0 +1,79 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqr3j76ykm3t6"]
+
+[ext_resource type="Script" uid="uid://h566s1gk5bdx" path="res://Steps/SectionStart/SectionStart.gd" id="1_kma47"]
+
+[node name="SectionStart" type="BoxContainer"]
+offset_right = 641.0
+offset_bottom = 217.0
+size_flags_vertical = 3
+vertical = true
+script = ExtResource("1_kma47")
+
+[node name="ImportFrom" type="BoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+vertical = true
+
+[node name="CenterContainer" type="CenterContainer" parent="ImportFrom"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ImportFrom/CenterContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ImportFrom/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="ImportFrom/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Choose Import File Type:"
+
+[node name="OptionButton" type="OptionButton" parent="ImportFrom/CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ImportFrom/CenterContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="FIle" type="Button" parent="ImportFrom/CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+disabled = true
+text = " Load file... "
+
+[node name="Text" type="Button" parent="ImportFrom/CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+disabled = true
+text = "Load from Text..."
+
+[node name="TextImport" type="TextEdit" parent="ImportFrom/CenterContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(200, 256)
+layout_mode = 2
+placeholder_text = "Paste Code Text in Here..."
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "or"
+horizontal_alignment = 1
+
+[node name="CreateNew" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="CreateNew"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Create from Scratch" type="Button" parent="CreateNew/CenterContainer"]
+layout_mode = 2
+text = " Create configuration from scratch..."
+
+[connection signal="item_selected" from="ImportFrom/CenterContainer/VBoxContainer/HBoxContainer/OptionButton" to="." method="_option_from_dropdown_selected"]
+[connection signal="pressed" from="ImportFrom/CenterContainer/VBoxContainer/HBoxContainer2/FIle" to="." method="_open_config_from_file_pressed"]
+[connection signal="pressed" from="ImportFrom/CenterContainer/VBoxContainer/HBoxContainer2/Text" to="." method="_open_config_from_text_pressed"]
+[connection signal="pressed" from="CreateNew/CenterContainer/Create from Scratch" to="." method="_create_scratch_pressed"]

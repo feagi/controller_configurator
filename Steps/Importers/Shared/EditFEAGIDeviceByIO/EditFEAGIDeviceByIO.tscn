@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0xls5b5fkaso"]
+
+[ext_resource type="Script" uid="uid://dagx1n3qvqm7b" path="res://Steps/Importers/Shared/EditFEAGIDeviceByIO/EditFEAGIDeviceByIO.gd" id="1_wsrnk"]
+
+[node name="EditFeagiDeviceByIO" type="VBoxContainer"]
+script = ExtResource("1_wsrnk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Select a node to edit"
+horizontal_alignment = 1
+
+[node name="Inputs" type="OptionButton" parent="HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Outputs" type="OptionButton" parent="HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="item_selected" from="HBoxContainer/Inputs" to="." method="_device_type_changed"]
+[connection signal="item_selected" from="HBoxContainer/Outputs" to="." method="_device_type_changed"]

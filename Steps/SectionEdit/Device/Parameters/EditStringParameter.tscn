@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://brahba5bxp4gm"]
+
+[ext_resource type="Script" uid="uid://bk3aqtk5418i2" path="res://Steps/SectionEdit/Device/Parameters/EditStringParameter.gd" id="1_7e7ky"]
+
+[node name="String" type="HBoxContainer"]
+script = ExtResource("1_7e7ky")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+mouse_filter = 1
+text = "NAME: "
+
+[node name="Value" type="LineEdit" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
